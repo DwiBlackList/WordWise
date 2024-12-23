@@ -47,7 +47,7 @@
             <li><strong>Undo:</strong> Ctrl + Z</li>
             <li><strong>Redo:</strong> Ctrl + Shift + Z</li>
             <li><strong>Delete Node:</strong> X or Delete key</li>
-            <li><strong>Zoom:</strong> Shift + Scroll</li>
+            <li><strong>Zoom:</strong> (Shift / Ctlr) + Scroll</li>
             <li><strong>Pan:</strong> Left Click + Drag</li>
             <li><strong>Reset Zoom:</strong> Click "Reset Zoom"</li>
         </ul>

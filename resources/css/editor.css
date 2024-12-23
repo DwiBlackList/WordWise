@@ -5,6 +5,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.node.selected {
+    outline: 2px solid #00ff00; /* Green outline */
+}
+
 #toolbar {
     position: fixed;
     top: 10px;

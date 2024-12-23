@@ -11,6 +11,7 @@ class NodeManager {
     private static instance: NodeManager;
     private readonly gridSize: number;
     private readonly nodeContainer: HTMLElement;
+    private selectedNode: Node | null = null; // Track the selected node
 
     constructor(containerId: string) {
         this.idCounter = 1;
@@ -77,6 +78,11 @@ class NodeManager {
         this.nodeContainer.appendChild(node.element);
         this.makeNodeDraggable(node);
         this.addEndpoints(node.element, node.constructor.name);
+
+        // Add click event listener to select the node
+        node.element.addEventListener('click', () => {
+            this.selectNode(node);
+        });
     }
 
     removeNodeFromCanvas(nodeId: string): void {
@@ -140,6 +146,21 @@ class NodeManager {
         if (command) {
             command.execute();
             this.undoStack.push(command);
+        }
+    }
+
+    selectNode(node: Node): void {
+        if (this.selectedNode) {
+            this.selectedNode.element.classList.remove('selected');
+        }
+        this.selectedNode = node;
+        this.selectedNode.element.classList.add('selected');
+    }
+
+    deselectNode(): void {
+        if (this.selectedNode) {
+            this.selectedNode.element.classList.remove('selected');
+            this.selectedNode = null;
         }
     }
 }
