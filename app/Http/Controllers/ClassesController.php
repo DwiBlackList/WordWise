@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Classes;
+use App\Models\Levels;
 use Auth;
 use Illuminate\Support\Str;
 
@@ -61,7 +62,9 @@ class ClassesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $class = Classes::findOrFail($id);
+        $levels = Levels::where('class_id', $id)->get();
+        return view('classes.show', compact('class' , 'levels'));
     }
 
     /**

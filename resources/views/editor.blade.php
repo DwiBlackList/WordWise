@@ -3,12 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    {{--    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">--}}
-
+    <title>Editor</title>
     <!-- Styles -->
     @vite('resources/css/editor.css')
 </head>
@@ -17,12 +12,19 @@
 <div id="toolbar">
     <button id="add-dialogue">Add Dialogue</button>
     <button id="add-choice">Add Choice</button>
+    <button id="add-start">Add Start</button>
     <button id="add-end">Add End</button>
     <button id="export">export</button>
     <button id="undo">Undo</button>
     <button id="redo">Redo</button>
     <button id="reset-zoom">Reset Zoom</button>
     <div id="zoom-label">100%</div>
+</div>
+
+<!-- Input Text di Pojok Kiri Atas -->
+<div id="top-left-input">
+    <input type="text" id="level_name" placeholder="Enter Name Level..">
+    <input type="hidden" id="class_id" name="class_id">
 </div>
 
 <div id="canvas-container">
@@ -52,7 +54,14 @@
     </div>
 </div>
 
+<script>
+    // Ambil angka setelah 'editor/' dari URL
+    const url = window.location.href;
+    const class_id = url.split('/').pop();
 
+    // Set nilai input hidden dengan levelId
+    document.getElementById('class_id').value = class_id;
+</script>
 @vite(['resources/ts/App.ts'])
 </body>
 </html>

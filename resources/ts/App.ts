@@ -2,9 +2,9 @@
 import {DialogueNode} from "./nodes/DialogueNode";
 import {ChoiceNode} from "./nodes/ChoiceNode";
 import {StartNode} from "./nodes/StartNode";
+import {EndNode} from "./nodes/EndNode";
 import {Node} from "./Node";
 import {Export} from "./Export";
-// import {EndNode} from "./nodes/EndNode";
 
 document.addEventListener("DOMContentLoaded", () => {
 // Initialize NodeManager with the ID of the container element
@@ -189,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ];
 
     nodeManager.addNode(new StartNode(50, window.innerHeight / 2));
+    nodeManager.addNode(new EndNode(window.innerWidth - 200, window.innerHeight / 2));
 
 // Event listeners for node creation
     document.getElementById("add-dialogue")?.addEventListener("click", () => {
@@ -201,22 +202,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("export")?.addEventListener("click", () => {
+        const level_name = document.getElementById("level_name") as HTMLInputElement;
+        const class_id = document.getElementById("class_id") as HTMLInputElement;
         const nodes = nodeManager.getNodes();
         const serializedData = nodes.map(node => node.serialize());
-        new Export(serializedData);
+
+        // Include level_name and class_id in the data sent to Export
+        new Export(serializedData, level_name.value, class_id.value);
     });
 
-// document.getElementById("addStartNode")?.addEventListener("click", () => {
-//     const node = new StartNode(nodeManager.generateNodeId(), 50, 50);
-//     addNode(node);
-// });
-//
-// document.getElementById("addEndNode")?.addEventListener("click", () => {
-//     const node = new EndNode(nodeManager.generateNodeId(), 300, 300);
-//     addNode(node);
-// });
+    document.getElementById("add-start")?.addEventListener("click", () => {
+        nodeManager.addNode(new StartNode(0, window.innerHeight / 2));
+    });
 
-// Undo and redo actions
+    document.getElementById("add-end")?.addEventListener("click", () => {
+        nodeManager.addNode(new EndNode(0, window.innerHeight / 2));
+    });
+
+    // Undo and redo actions
     document.getElementById("undo")?.addEventListener("click", () => {
         nodeManager.undo();
     });

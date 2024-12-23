@@ -39,6 +39,27 @@ body {
     text-align: center;
 }
 
+/* Gaya untuk input teks di pojok kiri atas */
+#top-left-input {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+#top-left-input input {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #3a3d4d;
+    color: #ffffff;
+}
+
+#top-left-input input::placeholder {
+    color: #bbbbbb;
+}
+
 #canvas-container {
     position: absolute;
     top: 0;

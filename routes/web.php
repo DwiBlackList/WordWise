@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EditorController;
+use App\Http\Controllers\LevelsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,5 +23,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/editor', [EditorController::class, 'index']);
+Route::get('/editor/{class_id}', [EditorController::class, 'index'])->name('editor');
 
 Route::resource('classes', ClassesController::class);
+Route::resource('levels', LevelsController::class);

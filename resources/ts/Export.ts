@@ -9,6 +9,8 @@
 
 interface DialogueData {
     dialogue_data: string;
+    level_name: string;
+    class_id: string;
 }
 
 interface ApiResponse {
@@ -16,11 +18,13 @@ interface ApiResponse {
     data: {
         id: number;
         dialogue_data: string;
+        level_name: string;
+        class_id: string;
     };
 }
 
 export class Export {
-    constructor(data: Node[]) {
+    constructor(data: Node[], private level_name: string, private class_id: string) {
         this.convertDialogue(data);
     }
 
@@ -94,7 +98,11 @@ export class Export {
         }
         // Output the generated dialogue
         console.log(dialogue.join('\n'));
-        await this.storeDialogue('../api/v1/dialogues', {dialogue_data: dialogue.join('\n')});
+        await this.storeDialogue('../api/v1/levels', {
+            dialogue_data: dialogue.join('\n'),
+            level_name: this.level_name,
+            class_id: this.class_id
+        });
     }
 
     async storeDialogue(url: string, data: DialogueData): Promise<ApiResponse | null> {

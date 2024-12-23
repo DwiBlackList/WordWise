@@ -28,7 +28,9 @@
                             @forelse ($data as $class)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        {{ $class->class_name }}
+                                        <a href="{{ route('classes.show', $class->id) }}" class="text-blue-600 hover:text-blue-900">
+                                            {{ $class->class_name }}
+                                        </a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                         {{ $class->token }}
