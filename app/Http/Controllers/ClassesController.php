@@ -21,7 +21,8 @@ class ClassesController extends Controller
      */
     public function index()
     {
-        $data = Classes::all();
+        $userId = Auth::id();
+        $data = Classes::where('user_id', $userId)->get();
         return view('classes.index', compact('data'));
     }
 
@@ -62,6 +63,18 @@ class ClassesController extends Controller
      */
     public function show(string $id)
     {
+        $class = Classes::find($id);
+
+        // Check if the class exists
+        if (!$class) {
+            abort(404, 'Class not found');
+        }
+
+        // Check if the logged-in user is the owner of the class
+        if ($class->user_id !== Auth::id()) {
+            abort(401, 'Unauthorized access');
+        }
+
         $class = Classes::findOrFail($id);
         $levels = Levels::where('class_id', $id)->get();
         return view('classes.show', compact('class' , 'levels'));

@@ -22,8 +22,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/editor', [EditorController::class, 'index']);
-Route::get('/editor/{class_id}', [EditorController::class, 'index'])->name('editor');
+// Route::get('/editor', [EditorController::class, 'index']);
+Route::get('/editor/{class_id}', [LevelsController::class, 'create'])->name('editor');
 
 Route::resource('classes', ClassesController::class);
 Route::resource('levels', LevelsController::class);

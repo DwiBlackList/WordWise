@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Classes;
+use Illuminate\Support\Facades\Auth;
 
 class LevelsController extends Controller
 {
@@ -23,9 +25,21 @@ class LevelsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($classId)
     {
-        //
+        $class = Classes::find($classId);
+
+        // Check if the class exists
+        if (!$class) {
+            abort(404, 'Class not found');
+        }
+
+        // Check if the logged-in user is the owner of the class
+        if ($class->user_id !== Auth::id()) {
+            abort(401, 'Unauthorized access');
+        }
+
+        return view('editor', ['classId' => $classId]);
     }
 
     /**

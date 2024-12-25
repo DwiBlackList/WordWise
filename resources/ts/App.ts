@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvasManager = new CanvasManager(containerId, "zoom-label");
 
     nodeManager.addNode(new StartNode(50, window.innerHeight / 2));
-    nodeManager.addNode(new EndNode(window.innerWidth - 200, window.innerHeight / 2));
+    // nodeManager.addNode(new EndNode(window.innerWidth - 200, window.innerHeight / 2));
 
     // Event listeners for node creation
     document.getElementById("add-dialogue")?.addEventListener("click", () => {
@@ -22,13 +22,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("add-choice")?.addEventListener("click", () => {
-        const node = new ChoiceNode(200, 200);
-        nodeManager.addNode(new ChoiceNode(200, 200));
+        nodeManager.addNode(new ChoiceNode(400, 400));
     });
 
     document.getElementById("export")?.addEventListener("click", () => {
         const level_name = document.getElementById("level_name") as HTMLInputElement;
         const class_id = document.getElementById("class_id") as HTMLInputElement;
+
+        // Validate level_name input
+        if (!level_name.value.trim()) {
+            level_name.style.borderColor = "red";
+            alert("Level name is required.");
+            return;
+        } else {
+            level_name.style.borderColor = ""; // Reset border color if valid
+        }
+
         const nodes = nodeManager.getNodes();
         const serializedData = nodes.map(node => node.serialize());
 
@@ -40,9 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
         nodeManager.addNode(new StartNode(0, window.innerHeight / 2));
     });
 
-    document.getElementById("add-end")?.addEventListener("click", () => {
-        nodeManager.addNode(new EndNode(0, window.innerHeight / 2));
-    });
+    // document.getElementById("add-end")?.addEventListener("click", () => {
+    //     nodeManager.addNode(new EndNode(0, window.innerHeight / 2));
+    // });
 
     // Undo and redo actions
     document.getElementById("undo")?.addEventListener("click", () => {
@@ -59,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
             nodeManager.undo();
         } else if (event.ctrlKey && event.shiftKey && event.key === 'Z') {
             nodeManager.redo();
+        }else if (event.key === 'Escape' || event.key === 'p' || event.key === 'P') {
+            nodeManager.deselectNode();
         } else if (event.key === 'x' || event.key === 'Delete') {
             if (nodeManager.selectedNode) {
                 nodeManager.removeNodeFromCanvas(nodeManager.selectedNode.id);

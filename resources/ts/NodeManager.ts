@@ -89,6 +89,15 @@ class NodeManager {
         const node = this.nodes.get(nodeId);
         if (!node) return;
 
+        // Prevent deletion of StartNode and EndNode
+        if (node.constructor.name === 'StartNode' || node.constructor.name === 'EndNode') {
+            console.warn(`Cannot delete ${node.constructor.name}`);
+            return;
+        }
+
+        // Remove connections to this node
+        this.nodes.forEach(n => n.removeConnection(node));
+
         this.nodes.delete(nodeId);
         this.nodeContainer.removeChild(node.element);
         this.jsPlumbInstance.removeAllEndpoints(node.element);
