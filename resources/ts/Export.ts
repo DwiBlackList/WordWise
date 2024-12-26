@@ -40,16 +40,15 @@ export class Export {
         });
 
         const processNode = (nodeId: string, indent: string = ""): string => {
-            if (!nodeMap[nodeId]) {
-                console.warn(`Node with ID ${nodeId} not found in nodeMap`);
-                return ""; // Skip nodes that are not in the nodeMap
-            }
             if (processedNodes.has(nodeId)) {
                 return ""; // Skip already processed nodes
             }
             processedNodes.add(nodeId);
 
             const currentNode = nodeMap[nodeId];
+            if (!currentNode) {
+                throw new Error(`Node with ID ${nodeId} not found in nodeMap`);
+            }
             let result = "";
 
             // Process DialogueNode
@@ -99,7 +98,7 @@ export class Export {
 
         // Start processing from StartNode
         const startNode = data.find(node => node.type === 'StartNode');
-        let dialogueXML = `<Level>\n\t<MainDialog>\n\t\t<Character>Villager</Character>\n\t\t<Question>Are You Ready ?</Question>\n\t\t<OptionA Action="0">Yes</OptionA>\n\t\t<OptionB Action="-1">No</OptionB>\n\t</MainDialog>\n`;
+        let dialogueXML = "<Level>\n";
         if (startNode && startNode.connections.length > 0) {
             startNode.connections.forEach(connectionId => {
                 if (!nodeIdToDialogueIndex.hasOwnProperty(connectionId)) {

@@ -95,9 +95,6 @@ class NodeManager {
             return;
         }
 
-        // Remove connections to this node
-        this.nodes.forEach(n => n.removeConnection(node));
-
         this.nodes.delete(nodeId);
         this.nodeContainer.removeChild(node.element);
         this.jsPlumbInstance.removeAllEndpoints(node.element);
