@@ -24,4 +24,9 @@ class Classes extends Model
     {
         return $this->hasMany(Levels::class);
     }
+
+    public function joinedclass()
+    {
+        return $this->hasMany(Joinedclass::class);
+    }
 }
