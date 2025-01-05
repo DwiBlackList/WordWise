@@ -8,7 +8,9 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "outDir": "./public/js",
-        "sourceMap": true
+        "sourceMap": true,
+        "preserveConstEnums": true,
+        "keep_quoted": true
     },
     "include": [
         "resources/ts/**/*"

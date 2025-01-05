@@ -1,29 +1,52 @@
 {
-  "_jsplumb-C0sRuFZe.js": {
-    "file": "assets/jsplumb-C0sRuFZe.js",
-    "name": "jsplumb"
+  "__commonjsHelpers-DWwsNxpa.js": {
+    "file": "assets/_commonjsHelpers-DWwsNxpa.js",
+    "name": "_commonjsHelpers"
+  },
+  "_jsplumb-ukg1E-b_.js": {
+    "file": "assets/jsplumb-ukg1E-b_.js",
+    "name": "jsplumb",
+    "imports": [
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-CM4tfBW1.css",
+    "file": "assets/app-BI2Jcd4J.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/editor.css": {
+    "file": "assets/editor-CCkpTO52.css",
+    "src": "resources/css/editor.css",
+    "isEntry": true
+  },
   "resources/js/LDE/Main.js": {
-    "file": "assets/Main-LNJx1xI_.js",
+    "file": "assets/Main-Ck8nYcCQ.js",
     "name": "Main",
     "src": "resources/js/LDE/Main.js",
     "isEntry": true,
     "imports": [
-      "_jsplumb-C0sRuFZe.js"
+      "_jsplumb-ukg1E-b_.js",
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-B-yv51px.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "__commonjsHelpers-DWwsNxpa.js"
     ]
   },
   "resources/ts/App.ts": {
-    "file": "assets/App-CtMJPJdM.js",
+    "file": "assets/App-BDK7Mxl3.js",
     "name": "App",
     "src": "resources/ts/App.ts",
     "isEntry": true,
     "imports": [
-      "_jsplumb-C0sRuFZe.js"
+      "_jsplumb-ukg1E-b_.js",
+      "__commonjsHelpers-DWwsNxpa.js"
     ]
   }
 }

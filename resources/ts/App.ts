@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Include level_name and class_id in the data sent to Export
         new Export(serializedData, level_name.value, class_id.value);
+
+        // Show pop-up notification
+        alert("Level has been created successfully.");
     });
 
     document.getElementById("add-start")?.addEventListener("click", () => {
