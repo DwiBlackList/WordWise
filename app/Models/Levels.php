@@ -19,4 +19,9 @@ class Levels extends Model
     {
         return $this->belongsTo(Classes::class);
     }
+
+    public function results()
+    {
+        return $this->hasMany(Results::class);
+    }
 }

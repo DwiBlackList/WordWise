@@ -1,10 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\v1\LevelsController;
-use App\Http\Controllers\Api\v1\LevelController;
-use App\Http\Controllers\Api\v1\PerformanceController;
-use App\Http\Controllers\Api\v1\StudentController;
-use App\Http\Controllers\Api\v1\TeacherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //rest api
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\v1'], function (){
-//    Route::apiResource('teachers', TeacherController::class);
-//    Route::apiResource('students', StudentController::class);
-//    Route::apiResource('levels', LevelController::class);
-//    Route::apiResource('performances', PerformanceController::class);
    Route::apiResource('levels', LevelsController::class);
 });
