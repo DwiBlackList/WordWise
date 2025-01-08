@@ -4,7 +4,7 @@ namespace App\Http\Resources\v1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LevelsResource extends JsonResource
+class JoinedclassResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,8 @@ class LevelsResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'user_id' => $this->user_id,
             'class_id' => $this->class_id,
-            'dialogue_data' => $this->dialogue_data,
-            'level_name' => $this->level_name,
         ];
     }
 }

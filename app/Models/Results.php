@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Level;
+use App\Models\Levels;
 
 class Results extends Model
 {
@@ -24,6 +24,6 @@ class Results extends Model
 
     public function level()
     {
-        return $this->belongsTo(Level::class);
+        return $this->belongsTo(Levels::class);
     }
 }

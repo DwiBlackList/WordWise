@@ -9,6 +9,8 @@ class Joinedclass extends Model
 {
     use HasFactory;
 
+    protected $table = 'joinedclass';
+
     protected $fillable = [
         'user_id', 
         'class_id', 
@@ -16,7 +18,7 @@ class Joinedclass extends Model
 
     public function classes()
     {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(Classes::class, 'class_id');
     }
 
     public function user()

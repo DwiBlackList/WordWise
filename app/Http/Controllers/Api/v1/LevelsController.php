@@ -17,10 +17,10 @@ class LevelsController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
-    {
-        return LevelsResource::collection(Levels::all());
-    }
+    // public function index(): AnonymousResourceCollection
+    // {
+    //     return LevelsResource::collection(Levels::all());
+    // }
 
     /**
      * Store a newly created level in storage.
@@ -28,23 +28,23 @@ class LevelsController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
-    {
-        // $validated = $request->validate([
-        //     'level_data' => 'required|string',
-        // ]);
+    // public function store(Request $request): JsonResponse
+    // {
+    //     // $validated = $request->validate([
+    //     //     'level_data' => 'required|string',
+    //     // ]);
 
-        $level = Levels::create([
-            'class_id' => $request->input('class_id'),
-            'level_name' => $request->input('level_name'),
-            'dialogue_data' => $request->input('dialogue_data'),
-        ]);
+    //     $level = Levels::create([
+    //         'class_id' => $request->input('class_id'),
+    //         'level_name' => $request->input('level_name'),
+    //         'dialogue_data' => $request->input('dialogue_data'),
+    //     ]);
 
-        return response()->json([
-            'message' => 'Levels created successfully',
-            'data' => new LevelsResource($level)
-        ], 201);
-    }
+    //     return response()->json([
+    //         'message' => 'Levels created successfully',
+    //         'data' => new LevelsResource($level)
+    //     ], 201);
+    // }
 
     /**
      * Display the specified level.
@@ -66,23 +66,23 @@ class LevelsController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function update(Request $request, $id): JsonResponse
-    {
-        $level = Levels::findOrFail($id);
+    // public function update(Request $request, $id): JsonResponse
+    // {
+    //     $level = Levels::findOrFail($id);
 
-        $validated = $request->validate([
-            'dialogue_data' => 'required|string',
-            'level_name' => 'required|string|max:255',
-            'class_id' => 'required|integer',
-        ]);
+    //     $validated = $request->validate([
+    //         'dialogue_data' => 'required|string',
+    //         'level_name' => 'required|string|max:255',
+    //         'class_id' => 'required|integer',
+    //     ]);
 
-        $level->update($validated);
+    //     $level->update($validated);
 
-        return response()->json([
-            'message' => 'Levels updated successfully',
-            'data' => new LevelsResource($level)
-        ]);
-    }
+    //     return response()->json([
+    //         'message' => 'Levels updated successfully',
+    //         'data' => new LevelsResource($level)
+    //     ]);
+    // }
 
     /**
      * Remove the specified level from storage.
@@ -90,13 +90,13 @@ class LevelsController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function destroy($id): JsonResponse
-    {
-        $level = Levels::findOrFail($id);
-        $level->delete();
+    // public function destroy($id): JsonResponse
+    // {
+    //     $level = Levels::findOrFail($id);
+    //     $level->delete();
 
-        return response()->json([
-            'message' => 'Levels deleted successfully'
-        ]);
-    }
+    //     return response()->json([
+    //         'message' => 'Levels deleted successfully'
+    //     ]);
+    // }
 }
