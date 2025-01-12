@@ -33,4 +33,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\v1'], f
     Route::get('classes/joinedclass/{user_id}', [ClassesController::class , 'UserJoinedClass']);
     Route::apiResource('results', ResultsController::class);
     Route::apiResource('joinedclass', JoinedclassController::class);
+    
+    Route::middleware(['api', 'web'])->group(function () {
+        Route::post('/login', [UserController::class, 'login']);
+    });
 });

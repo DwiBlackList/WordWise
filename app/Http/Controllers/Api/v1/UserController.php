@@ -11,10 +11,42 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class UserController extends Controller
 {
+    /**
+     * User Login.
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function login(Request $request)
+    {
+        try {
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+        
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+        
+                return response()->json([
+                    'message' => 'Login successful',
+                    'user' => Auth::user(),
+                    'token' => $request->user()->createToken('API Token')->plainTextToken,
+                ]);
+            }
+        
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        } catch (\Exception $e) {
+            Log::error('Login error: ' . $e->getMessage());
+            return response()->json(['message' => 'An error occurred during login'], 500);
+        }
+    }
+
     /**
      * Display a listing of the User.
      *
@@ -80,17 +112,14 @@ class UserController extends Controller
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'school' => ['required', 'string', 'max:255'],
         ]);
 
-        $user->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'school' => $request->input('school'),
-        ]);
+        $user->name = $validated['name'];
+        $user->password = Hash::make($validated['password']);
+        $user->school = $validated['school'];
+        $user->save();
 
         return response()->json([
             'message' => 'User updated successfully',
