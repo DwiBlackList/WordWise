@@ -112,13 +112,35 @@ class UserController extends Controller
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'school' => ['required', 'string', 'max:255'],
         ]);
 
         $user->name = $validated['name'];
-        $user->password = Hash::make($validated['password']);
         $user->school = $validated['school'];
+        $user->save();
+
+        return response()->json([
+            'message' => 'User updated successfully',
+            'data' => new UserResource($user)
+        ]);
+    }
+
+    /**
+     * Update the specified user in storage.
+     *
+     * @param Request $request
+     * @param  int  $id
+     * @return JsonResponse
+     */
+    public function updatepass(Request $request, $id): JsonResponse
+    {
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user->password = Hash::make($validated['password']);
         $user->save();
 
         return response()->json([

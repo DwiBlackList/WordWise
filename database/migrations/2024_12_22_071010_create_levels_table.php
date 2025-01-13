@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('class_id')->constrained('classes')->onDelete('cascade');
             $table->string('level_name');
+            $table->string('chapter_name');
             $table->longText('dialogue_data');
             $table->timestamps();
         });

@@ -24,6 +24,7 @@
 <!-- Input Text di Pojok Kiri Atas -->
 <div id="top-left-input">
     <input type="text" id="level_name" placeholder="Enter Name Level..">
+    <input type="text" id="chapter_name" placeholder="Enter Name Chapter..">
     <input type="hidden" id="class_id" name="class_id">
 </div>
 
@@ -61,6 +62,7 @@
     const class_id = url.split('/').pop();
 
     // Set nilai input hidden dengan levelId
+    document.getElementById('class_id').value = class_id;
     document.getElementById('class_id').value = class_id;
 </script>
 @vite(['resources/ts/App.ts'])

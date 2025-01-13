@@ -27,12 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("export")?.addEventListener("click", () => {
         const level_name = document.getElementById("level_name") as HTMLInputElement;
+        const chapter_name = document.getElementById("chapter_name") as HTMLInputElement;
         const class_id = document.getElementById("class_id") as HTMLInputElement;
 
         // Validate level_name input
         if (!level_name.value.trim()) {
             level_name.style.borderColor = "red";
             alert("Level name is required.");
+            return;
+        } else if(!chapter_name.value.trim()) {
+            chapter_name.style.borderColor = "red";
+            alert("Chapter name is required.");
             return;
         } else {
             level_name.style.borderColor = ""; // Reset border color if valid
@@ -42,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const serializedData = nodes.map(node => node.serialize());
 
         // Include level_name and class_id in the data sent to Export
-        new Export(serializedData, level_name.value, class_id.value);
+        new Export(serializedData, level_name.value, level_name.value, class_id.value );
 
         // Show pop-up notification
         alert("Level has been created successfully.");

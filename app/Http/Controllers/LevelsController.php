@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Classes;
+use App\Models\Levels;
 use Illuminate\Support\Facades\Auth;
 
 class LevelsController extends Controller
@@ -79,6 +80,10 @@ class LevelsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $class = Levels::findOrFail($id);
+        $class->delete();
+
+        // Redirect ke halaman sebelumnya dengan pesan sukses
+        return redirect()->back()->with('success', 'Class deleted successfully.');
     }
 }

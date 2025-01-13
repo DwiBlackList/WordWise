@@ -28,23 +28,24 @@ class LevelsController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    // public function store(Request $request): JsonResponse
-    // {
-    //     // $validated = $request->validate([
-    //     //     'level_data' => 'required|string',
-    //     // ]);
+    public function store(Request $request): JsonResponse
+    {
+        // $validated = $request->validate([
+        //     'level_data' => 'required|string',
+        // ]);
 
-    //     $level = Levels::create([
-    //         'class_id' => $request->input('class_id'),
-    //         'level_name' => $request->input('level_name'),
-    //         'dialogue_data' => $request->input('dialogue_data'),
-    //     ]);
+        $level = Levels::create([
+            'class_id' => $request->input('class_id'),
+            'level_name' => $request->input('level_name'),
+            'chapter_name' => $request->input('chapter_name'),
+            'dialogue_data' => $request->input('dialogue_data'),
+        ]);
 
-    //     return response()->json([
-    //         'message' => 'Levels created successfully',
-    //         'data' => new LevelsResource($level)
-    //     ], 201);
-    // }
+        return response()->json([
+            'message' => 'Levels created successfully',
+            'data' => new LevelsResource($level)
+        ], 201);
+    }
 
     /**
      * Display the specified level.

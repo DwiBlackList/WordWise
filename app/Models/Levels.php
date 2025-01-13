@@ -12,6 +12,7 @@ class Levels extends Model
     protected $fillable = [
         'class_id', 
         'level_name', 
+        'chapter_name', 
         'dialogue_data', 
     ];
 

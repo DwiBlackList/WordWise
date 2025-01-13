@@ -32,6 +32,9 @@
                                     Levels Name
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Chapter Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                     Action
                                 </th>
                             </tr>
@@ -40,12 +43,13 @@
                             @forelse ($levels as $x)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        <a href="{{ route('levels.show', $x->id) }}" class="text-blue-600 hover:text-blue-900">
                                             {{ $x->level_name }}
-                                        </a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        <button class="text-blue-600 hover:text-blue-900 editClassButton">Edit</button>
+                                            {{ $x->chapter_name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                        <!-- <button class="text-blue-600 hover:text-blue-900 editClassButton">Edit</button> -->
                                         <form action="{{ route('levels.destroy', $class->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')

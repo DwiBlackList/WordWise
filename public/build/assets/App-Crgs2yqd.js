@@ -268,8 +268,9 @@ class StartNode extends Node {
   }
 }
 class Export {
-  constructor(data, level_name, class_id) {
+  constructor(data, level_name, chapter_name, class_id) {
     this.level_name = level_name;
+    this.chapter_name = chapter_name;
     this.class_id = class_id;
     this.convertDialogue(data);
   }
@@ -349,6 +350,7 @@ class Export {
     await this.storeDialogue("../api/v1/levels", {
       dialogue_data: dialogueXML,
       level_name: this.level_name,
+      chapter_name: this.chapter_name,
       class_id: this.class_id
     });
   }
@@ -447,17 +449,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   (_c = document.getElementById("export")) == null ? void 0 : _c.addEventListener("click", () => {
     const level_name = document.getElementById("level_name");
+    const chapter_name = document.getElementById("chapter_name");
     const class_id = document.getElementById("class_id");
     if (!level_name.value.trim()) {
       level_name.style.borderColor = "red";
       alert("Level name is required.");
+      return;
+    } else if (!chapter_name.value.trim()) {
+      chapter_name.style.borderColor = "red";
+      alert("Chapter name is required.");
       return;
     } else {
       level_name.style.borderColor = "";
     }
     const nodes = nodeManager.getNodes();
     const serializedData = nodes.map((node) => node.serialize());
-    new Export(serializedData, level_name.value, class_id.value);
+    new Export(serializedData, level_name.value, level_name.value, class_id.value);
     alert("Level has been created successfully.");
   });
   (_d = document.getElementById("add-start")) == null ? void 0 : _d.addEventListener("click", () => {

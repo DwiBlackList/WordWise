@@ -10,6 +10,7 @@
 interface DialogueData {
     dialogue_data: string;
     level_name: string;
+    chapter_name: string;
     class_id: string;
 }
 
@@ -19,12 +20,13 @@ interface ApiResponse {
         id: number;
         dialogue_data: string;
         level_name: string;
+        chapter_name: string;
         class_id: string;
     };
 }
 
 export class Export {
-    constructor(data: Node[], private level_name: string, private class_id: string) {
+    constructor(data: Node[], private level_name: string, private chapter_name: string, private class_id: string) {
         this.convertDialogue(data);
     }
 
@@ -115,6 +117,7 @@ export class Export {
         await this.storeDialogue('../api/v1/levels', {
             dialogue_data: dialogueXML,
             level_name: this.level_name,
+            chapter_name: this.chapter_name,
             class_id: this.class_id
         });
     }
