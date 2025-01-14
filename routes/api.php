@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\v1\LevelsController;
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Controllers\Api\v1\ClassesController;
+use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\ResultsController;
 use App\Http\Controllers\Api\v1\JoinedclassController;
 use App\Models\User;
@@ -34,7 +35,14 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\v1'], f
     Route::get('classes/joinedclass/{user_id}', [ClassesController::class , 'UserJoinedClass']);
     Route::apiResource('results', ResultsController::class);
     Route::apiResource('joinedclass', JoinedclassController::class);
-    
+
+    Route::get('dashboard/weakness', [DashboardController::class, 'Weakness']);
+    Route::get('dashboard/strength', [DashboardController::class, 'Strength']);
+    Route::get('dashboard/leaderboard', [DashboardController::class, 'Leadboard']);
+    Route::get('dashboard/activity', [DashboardController::class, 'Activity']);
+    Route::get('dashboard/currentknowledge', [DashboardController::class, 'CurrentKnowledge']);
+
+
     Route::middleware(['api', 'web'])->group(function () {
         Route::post('/login', [UserController::class, 'login']);
     });

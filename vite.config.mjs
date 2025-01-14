@@ -1,5 +1,6 @@
-import {defineConfig} from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import path from "path";
 
 export default defineConfig({
     build: {
@@ -9,23 +10,36 @@ export default defineConfig({
                 properties: false, // Nonaktifkan mangling properti
             },
         },
-        outDir: 'public/build',
+        outDir: "public/build",
+        commonjsOptions: {
+            transformMixedEsModules: true,
+        },
     },
     plugins: [
         laravel({
             input: [
-                'resources/ts/App.ts', 
-                'resources/css/app.css',
-                'resources/js/app.js',
-                'resources/css/editor.css',
-                'resources/js/LDE/Main.js',
+                "resources/ts/App.ts",
+                "resources/css/app.css",
+                "resources/js/app.js",
+                "resources/css/editor.css",
+                "resources/js/LDE/Main.js",
+                "resources/js/index.tsx",
             ],
             refresh: true,
         }),
     ],
+    server: {
+        proxy: {
+            "/api": "http://localhost:8000",
+        },
+    },
     resolve: {
         alias: {
-            '@': '/resources/ts',
+            "@": "/resources/ts",
+            "@tailwindConfig": path.resolve(__dirname, "tailwind.config.js"),
         },
+    },
+    optimizeDeps: {
+        include: ["@tailwindConfig"],
     },
 });
