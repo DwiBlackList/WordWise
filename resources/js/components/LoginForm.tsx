@@ -1,9 +1,7 @@
 import { Eye } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Link } from "react-router-dom";
 import React from "react";
-
 const LoginForm = () => {
     return (
         <form className="space-y-3 sm:space-y-4">
@@ -31,12 +29,12 @@ const LoginForm = () => {
             </div>
 
             <div className="text-right">
-                <Link
-                    to="/forgot-password"
+                <a
+                    href="/forgot-password"
                     className="text-xs sm:text-sm text-slate-600 hover:text-slate-800"
                 >
                     Forgot password?
-                </Link>
+                </a>
             </div>
 
             <Button
