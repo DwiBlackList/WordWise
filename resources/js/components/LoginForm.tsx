@@ -9,20 +9,20 @@ const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfTokenElement
-        ? csrfTokenElement.getAttribute("content")
-        : "";
+
+    const csrfToken = csrfTokenElement ? csrfTokenElement.getAttribute('content') : '';
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post("/login", {
+
+            const response = await axios.post('/login', {
                 email,
                 password,
-                _token: csrfToken,
+                _token: csrfToken
             });
             // Handle successful login
-            window.location.href = "/home";
+            window.location.href = '/home';
         } catch (error) {
             // Handle login error
         }

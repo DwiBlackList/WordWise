@@ -12,8 +12,9 @@ export const Sidebar = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post("/logout");
-            window.location.href = "/login";
+
+            await axios.post('/logout');
+            window.location.href = '/login';
         } catch (error) {
             // Handle logout error
         }
@@ -158,6 +159,16 @@ export const Sidebar = () => {
                         Logout
                     </span>
                 </a>
+
+                {/* User Info Section */}
+                <div className="flex items-center p-4">
+                    <button
+                        onClick={handleLogout}
+                        className="w-full h-10 sm:h-12 rounded-full bg-red-400 hover:bg-red-500 text-white font-semibold text-sm sm:text-base"
+                    >
+                        Logout
+                    </button>
+                </div>
 
                 {/* User Info Section */}
                 <div className="flex items-center p-4">
