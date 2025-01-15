@@ -1,18 +1,19 @@
 <?php
 
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\LevelsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [Controller::class, 'LandingPage']);
+
+Route::get('/dashboard', [Controller::class, 'DashboardPage'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/table', [Controller::class, 'TablePage'])->middleware(['auth', 'verified'])->name('table');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

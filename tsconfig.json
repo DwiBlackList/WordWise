@@ -9,10 +9,8 @@
         "forceConsistentCasingInFileNames": true,
         "outDir": "./public/js",
         "sourceMap": true,
-        "preserveConstEnums": true,
-        "keep_quoted": true
+        "preserveConstEnums": true
+        // "keep_quoted": true
     },
-    "include": [
-        "resources/ts/**/*"
-    ]
+    "include": ["resources/ts/**/*"]
 }
