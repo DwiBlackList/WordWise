@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, 'LandingPage']);
 
-Route::get('/dashboard', [Controller::class, 'DashboardPage'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/home', [Controller::class, 'DashboardPage'])->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/table', [Controller::class, 'TablePage'])->middleware(['auth', 'verified'])->name('table');
 

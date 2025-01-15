@@ -1,11 +1,22 @@
 import { useState } from "react";
 import { PanelRightOpen, PanelRightClose } from "lucide-react";
 import React from "react";
+import axios from "axios";
+
 export const Sidebar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
+    };
+
+    const handleLogout = async () => {
+        try {
+            await axios.post('/logout');
+            window.location.href = '/login';
+        } catch (error) {
+            // Handle logout error
+        }
     };
 
     return (
@@ -35,7 +46,7 @@ export const Sidebar = () => {
                         <li className="px-5"></li>
                         <li>
                             <a
-                                href="/dashboard"
+                                href="/home"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500"
                             >
                                 <span
@@ -104,10 +115,20 @@ export const Sidebar = () => {
                     </ul>
                 </div>
 
-                {/* User Info Section */}
+                {/* Logout Button */}
                 <div className="flex w-3/4 border-b border-gray-200 self-center">
                     <br />
                 </div>
+                <div className="flex items-center p-4">
+                    <button
+                        onClick={handleLogout}
+                        className="w-full h-10 sm:h-12 rounded-full bg-red-400 hover:bg-red-500 text-white font-semibold text-sm sm:text-base"
+                    >
+                        Logout
+                    </button>
+                </div>
+
+                {/* User Info Section */}
                 <div className="flex items-center p-4">
                     <img
                         src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png"
