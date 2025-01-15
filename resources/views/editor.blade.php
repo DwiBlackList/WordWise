@@ -63,7 +63,6 @@
 
     // Set nilai input hidden dengan levelId
     document.getElementById('class_id').value = class_id;
-    document.getElementById('class_id').value = class_id;
 </script>
 @vite(['resources/ts/App.ts'])
 </body>

@@ -47,10 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const serializedData = nodes.map(node => node.serialize());
 
         // Include level_name and class_id in the data sent to Export
-        new Export(serializedData, level_name.value, level_name.value, class_id.value );
+        new Export(serializedData, level_name.value, chapter_name.value, class_id.value );
 
         // Show pop-up notification
         alert("Level has been created successfully.");
+        window.history.back();
     });
 
     document.getElementById("add-start")?.addEventListener("click", () => {
