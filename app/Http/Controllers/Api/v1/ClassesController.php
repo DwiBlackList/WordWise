@@ -7,10 +7,12 @@ use App\Http\Resources\v1\ClassesResource;
 use App\Models\Classes;
 use App\Models\Levels;
 use App\Models\Joinedclass;
+use Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Str;
 
 class ClassesController extends Controller
 {
@@ -35,6 +37,30 @@ class ClassesController extends Controller
             'user_joined_classes' => $joinedClasses
         ]);
     }
+
+
+
+    public function store(Request $request)
+    {
+        // Validasi data
+        $request->validate([
+            'class_name' => 'required|string|max:255',
+        ]);
+
+        // Ambil id_user dari auth
+        $userId = Auth::id();
+
+        // Simpan data ke database
+        Classes::create([
+            'class_name' => $request->input('class_name'),
+            'token' => Str::random(10),
+            'user_id' => $userId,
+        ]);
+
+        // Redirect ke halaman sebelumnya dengan pesan sukses
+        return response()->json(['success' => 'Class added successfully'], 201);
+    }
+
 
     /**
      * Store a newly created classes in storage.
@@ -70,7 +96,7 @@ class ClassesController extends Controller
     {
         $classes = Classes::findOrFail($id);
         $levels = Levels::where('class_id', $id)->get();
-        
+
         return response()->json([
             'class' => $classes,
             'levels' => $levels
@@ -118,3 +144,4 @@ class ClassesController extends Controller
     //     ]);
     // }
 }
+

@@ -4,43 +4,24 @@ import Modal from "./modal";
 
 interface TableProps {
     data: {
-        name: string;
-        content1: string;
-        content2: string;
-        content3: string;
+        class_name: string;
+        token: string;
     }[];
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState<{
-        name: string;
-        content1: string;
-        content2: string;
-        content3: string;
+        class_name: string;
+        token: string;
     } | null>(null);
 
-    const handleRowClick = (row: {
-        name: string;
-        content1: string;
-        content2: string;
-        content3: string;
-    }) => {
+    const handleRowClick = (row: { class_name: string; token: string }) => {
         setSelectedRow(row);
         setIsModalOpen(true);
     };
 
     const handleCloseModal = () => {
-        setIsModalOpen(false);
-        setSelectedRow(null);
-    };
-
-    const handleConfirm = (formData: {
-        name: string;
-        bio: string;
-        details: string[];
-    }) => {
-        console.log("Form Data:", formData);
         setIsModalOpen(false);
         setSelectedRow(null);
     };
@@ -51,16 +32,10 @@ const Table: React.FC<TableProps> = ({ data }) => {
                 <thead className="bg-white border-b border-gray-200">
                     <tr>
                         <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
-                            Name
+                            Class Name
                         </th>
                         <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
-                            Head
-                        </th>
-                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
-                            Head
-                        </th>
-                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
-                            Head
+                            Token
                         </th>
                         <th className="px-2 sm:px-4 py-2 text-center text-gray-600">
                             Action
@@ -72,25 +47,18 @@ const Table: React.FC<TableProps> = ({ data }) => {
                         <tr
                             key={index}
                             className="bg-white cursor-pointer hover:bg-gray-100"
-                            onClick={() => handleRowClick(row)}
                         >
-                            <td className="px-2 sm:px-4 py-2">{row.name}</td>
                             <td className="px-2 sm:px-4 py-2">
-                                {row.content1}
+                                {row.class_name}
                             </td>
-                            <td className="px-2 sm:px-4 py-2">
-                                {row.content2}
-                            </td>
-                            <td className="px-2 sm:px-4 py-2">
-                                {row.content3}
-                            </td>
+                            <td className="px-2 sm:px-4 py-2">{row.token}</td>
                             <td className="px-2 sm:px-4 py-2 text-center">
                                 <button
                                     className="text-gray-500 transition duration-200"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        alert(`Delete row ${index + 1}`);
-                                    }}
+                                    // onClick={(e) => {
+                                    //     e.stopPropagation();
+                                    //     alert(`Delete row ${index + 1}`);
+                                    // }}
                                 >
                                     <FaRegTrashCan />
                                 </button>
@@ -99,13 +67,6 @@ const Table: React.FC<TableProps> = ({ data }) => {
                     ))}
                 </tbody>
             </table>
-            {isModalOpen && selectedRow && (
-                <Modal
-                    isOpen={isModalOpen}
-                    onClose={handleCloseModal}
-                    onConfirm={handleConfirm}
-                />
-            )}
         </div>
     );
 };

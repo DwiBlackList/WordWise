@@ -1,6 +1,5 @@
 import { cn } from "../lib/utils";
 import React from "react";
-
 interface CategoryCardProps {
     number: string;
     category: string;
@@ -18,7 +17,7 @@ const ClassCard = ({
         <div className="bg-white rounded-3xl p-6 flex flex-col gap-4">
             <div className="space-y-1">
                 <p className="text-2xl text-gray-700 font-light">{number}.</p>
-                <p className={cn("text-sm uppercase tracking-wider", color)}>
+                <p className={cn("text-md uppercase tracking-wider", color)}>
                     {category}
                 </p>
             </div>
