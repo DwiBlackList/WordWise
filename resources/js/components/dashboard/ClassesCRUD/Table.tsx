@@ -58,7 +58,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, _) => (
+                    {data?.map((row, _) => (
                         <tr
                             key={row.id}
                             className="bg-white  hover:bg-gray-100"
