@@ -16,23 +16,23 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(string $id)
+    public function index()
     {
-        $userId = Auth::id();
-        $classes = Classes::where('user_id', $userId)->get();
+        // $userId = Auth::id();
+        // $classes = Classes::where('user_id', $userId)->get();
 
-        $levels = Levels::where('class_id', 1)->get();
-        $results = Results::where('level_id', 2)->get();
-        $result = $results->sortByDesc(function($result) {
-            return (int) explode('/', $result->score)[0];
-        });
+        // $levels = Levels::where('class_id', 1)->get();
+        // $results = Results::where('level_id', 2)->get();
+        // $result = $results->sortByDesc(function($result) {
+        //     return (int) explode('/', $result->score)[0];
+        // });
         // dd($levels);
 
-        // $weakestTopics = app(DashboardController::class)->Weakness()->getData();
-        // $strongestTopics = app(DashboardController::class)->Strength()->getData();
-        // $leaders = app(DashboardController::class)->Leadboard()->getData();
-        // $activity = app(DashboardController::class)->Activity()->getData();
-        // $currentKnowledge = app(DashboardController::class)->CurrentKnowledge()->getData();
+        $weakestTopics = app(DashboardController::class)->Weakness()->getData();
+        $strongestTopics = app(DashboardController::class)->Strength()->getData();
+        $leaders = app(DashboardController::class)->Leadboard()->getData();
+        $activity = app(DashboardController::class)->Activity()->getData();
+        $currentKnowledge = app(DashboardController::class)->CurrentKnowledge()->getData();
 
         $ListClass = $this->ListClass();
         // dd($ListClass);
@@ -55,13 +55,23 @@ class DashboardController extends Controller
         $classes = Classes::where('user_id', $userId)->get();
         return response()->json($classes);
     }
-    public function Leadboard($id){
-        $levels = Levels::where('class_id', $id)->get();
-        $results = Results::where('level_id', 2)->get();
-        $result = $results->sortByDesc(function($result) {
-            return (int) explode('/', $result->score)[0];
-        });
-        dd($result);
+    public function Leadboard(){
+        // $levels = Levels::where('class_id', $id)->get();
+        // $results = Results::where('level_id', 2)->get();
+        // $result = $results->sortByDesc(function($result) {
+        //     return (int) explode('/', $result->score)[0];
+        // });
+        // dd($result);
+        return response()->json([
+            'leaders' => [
+                ['name' => 'Name 1', 'rank' => 1],
+                ['name' => 'Name 2', 'rank' => 2],
+                ['name' => 'Name 3', 'rank' => 3],
+                ['name' => 'Name 4', 'rank' => 4],
+                ['name' => 'Name 5', 'rank' => 5],
+                ['name' => 'Name 6', 'rank' => 6],
+            ],
+        ]);
     }
     public function Weakness(){
         return response()->json([
