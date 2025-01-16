@@ -38,26 +38,26 @@ class ClassesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     // Validasi data
-    //     $request->validate([
-    //         'class_name' => 'required|string|max:255',
-    //     ]);
+    public function store(Request $request)
+    {
+        // Validasi data
+        $request->validate([
+            'class_name' => 'required|string|max:255',
+        ]);
 
-    //     // Ambil id_user dari auth
-    //     $userId = Auth::id();
+        // Ambil id_user dari auth
+        $userId = Auth::id();
 
-    //     // Simpan data ke database
-    //     Classes::create([
-    //         'class_name' => $request->input('class_name'),
-    //         'token' => Str::random(10),
-    //         'user_id' => $userId,
-    //     ]);
+        // Simpan data ke database
+        Classes::create([
+            'class_name' => $request->input('class_name'),
+            'token' => Str::random(10),
+            'user_id' => $userId,
+        ]);
 
-    //     // Redirect ke halaman sebelumnya dengan pesan sukses
-    //     return redirect()->route('classes.index')->with('success', 'Class added successfully.');
-    // }
+        // Redirect ke halaman sebelumnya dengan pesan sukses
+        return redirect()->route('classes.index')->with('success', 'Class created successfully.');
+    }
 
     /**
      * Display the specified resource.

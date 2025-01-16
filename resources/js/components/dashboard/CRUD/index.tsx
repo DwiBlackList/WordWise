@@ -22,7 +22,7 @@ const Page: React.FC<PageProps> = ({ data }) => {
     const handleConfirm = async (formData: { class_name: string }) => {
         console.log("formData: ", formData);
         try {
-            const response = await axios.post("/api/v1/classes", {
+            const response = await axios.post("/classes", {
                 ...formData,
                 _token: csrfToken,
             });
