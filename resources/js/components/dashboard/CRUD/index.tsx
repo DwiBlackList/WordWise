@@ -31,6 +31,7 @@ const Page: React.FC<PageProps> = ({ data }) => {
 
             if (response.status === 201) {
                 console.log("Class added successfully");
+                window.location.reload();
             } else {
                 console.error("Failed to add class");
             }

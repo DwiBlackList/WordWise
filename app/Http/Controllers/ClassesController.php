@@ -56,7 +56,8 @@ class ClassesController extends Controller
         ]);
 
         // Redirect ke halaman sebelumnya dengan pesan sukses
-        return redirect()->route('classes.index')->with('success', 'Class created successfully.');
+        // return redirect()->route('classes.index')->with('success', 'Class created successfully.');
+        return response()->json(['success' => 'Class added successfully'], 201);
     }
 
     /**
