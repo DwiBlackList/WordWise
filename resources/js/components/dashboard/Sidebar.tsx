@@ -81,7 +81,7 @@ export const Sidebar = () => {
                         </li>
                         <li>
                             <a
-                                href="/table"
+                                href="/classes"
                                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500"
                             >
                                 <span
@@ -109,7 +109,7 @@ export const Sidebar = () => {
                                         !isExpanded && "hidden"
                                     }`}
                                 >
-                                    Table
+                                    Classes
                                 </span>
                             </a>
                         </li>

@@ -13,7 +13,7 @@ Route::get('/', [Controller::class, 'LandingPage']);
 
 Route::get('/home', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/table', [ClassesController::class, 'index'])->middleware(['auth', 'verified'])->name('table');
+// Route::get('/table', [ClassesController::class, 'index'])->middleware(['auth', 'verified'])->name('table'); sudah ada di Route::resource('classes', ClassesController::class);
 
 
 Route::middleware('auth')->group(function () {
