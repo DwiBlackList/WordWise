@@ -12,24 +12,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function DashboardPage() {
-
-        $weakestTopics = app(DashboardController::class)->Weakness()->getData();
-        $strongestTopics = app(DashboardController::class)->Strength()->getData();
-        $leaders = app(DashboardController::class)->Leadboard()->getData();
-        $activity = app(DashboardController::class)->Activity()->getData();
-        $currentKnowledge = app(DashboardController::class)->CurrentKnowledge()->getData();
-
-        return view('dashboard', [
-            'ssrData' => json_encode([
-                'weakestTopics' => $weakestTopics->weakestTopics ?? [],
-                'strongestTopics' => $strongestTopics->strongestTopics ?? [],
-                'leaders' => $leaders->leaders ?? [],
-                'activity' => $activity->activity ?? [],
-                'currentKnowledge' => $currentKnowledge,
-            ]),
-        ]);
-    }
     public function TablePage(){
 
         $levelProgress = app(DashboardController::class)->LevelProgress()->getData();
