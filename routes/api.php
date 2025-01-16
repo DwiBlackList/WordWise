@@ -42,6 +42,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\v1'], f
     Route::get('dashboard/activity', [DashboardController::class, 'Activity']);
     Route::get('dashboard/currentknowledge', [DashboardController::class, 'CurrentKnowledge']);
 
+    Route::post('classes', [ClassesController::class, 'store']);
+
 
     Route::middleware(['api', 'web'])->group(function () {
         Route::post('/login', [UserController::class, 'login']);

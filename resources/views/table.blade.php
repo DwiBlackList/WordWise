@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Table</title>
+    <link rel="icon" type="image" href="/logo.svg" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/js/Table.tsx', 'resources/css/app.css'])
 </head>
 

@@ -9,11 +9,13 @@ const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+
     const csrfToken = csrfTokenElement ? csrfTokenElement.getAttribute('content') : '';
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+
             const response = await axios.post('/login', {
                 email,
                 password,
@@ -56,12 +58,12 @@ const LoginForm = () => {
             </div>
 
             <div className="text-right">
-                <Link
-                    to="/forgot-password"
+                <a
+                    href="/forgot-password"
                     className="text-xs sm:text-sm text-slate-600 hover:text-slate-800"
                 >
                     Forgot password?
-                </Link>
+                </a>
             </div>
 
             <Button
