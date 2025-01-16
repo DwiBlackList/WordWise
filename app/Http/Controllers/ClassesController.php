@@ -79,7 +79,7 @@ class ClassesController extends Controller
 
         $class = Classes::findOrFail($id);
         $levels = Levels::where('class_id', $id)->get();
-        return view('classes.show', compact('class' , 'levels'));
+        return view('levelCRUD', compact('class' , 'levels'));
     }
 
     /**

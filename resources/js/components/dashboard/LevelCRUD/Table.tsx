@@ -32,10 +32,10 @@ const Table: React.FC<TableProps> = ({ data }) => {
                 <thead className="bg-white border-b border-gray-200">
                     <tr>
                         <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
-                            Class Name
+                            Level Name
                         </th>
                         <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
-                            Token
+                            Chapter Name
                         </th>
                         <th className="px-2 sm:px-4 py-2 text-center text-gray-600">
                             Action
@@ -43,15 +43,17 @@ const Table: React.FC<TableProps> = ({ data }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, index) => (
+                    {data?.levelData?.map((row, index) => (
                         <tr
                             key={index}
                             className="bg-white cursor-pointer hover:bg-gray-100"
                         >
                             <td className="px-2 sm:px-4 py-2">
-                                {row.class_name}
+                                {row.level_name}
                             </td>
-                            <td className="px-2 sm:px-4 py-2">{row.token}</td>
+                            <td className="px-2 sm:px-4 py-2">
+                                {row.chapter_name}
+                            </td>
                             <td className="px-2 sm:px-4 py-2 text-center">
                                 <button
                                     className="text-gray-500 transition duration-200"
