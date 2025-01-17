@@ -7,6 +7,13 @@ import { useAuth } from "../../hooks/auth"; // Import the custom hook to get aut
 export const Sidebar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const { user } = useAuth(); // Get the authenticated user data
+    // const HandleUsersAdmins = () => {
+    //     try{
+    //         await axios.get("/users")
+    //     }
+    // };
+
+    console.log(user);
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
@@ -45,7 +52,6 @@ export const Sidebar = () => {
                 </div>
                 <div className="overflow-x-hidden flex-grow">
                     <ul className="flex flex-col py-4 space-y-1">
-                        <li className="px-5"></li>
                         <li>
                             <a
                                 href="/home"
@@ -114,6 +120,48 @@ export const Sidebar = () => {
                                 </span>
                             </a>
                         </li>
+                        {user?.role === "admins" ? (
+                            <li>
+                                <a
+                                    href="/users"
+                                    className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500"
+                                >
+                                    <span
+                                        className={`inline-flex justify-center items-center ${
+                                            isExpanded ? "ml-4" : "mx-auto"
+                                        }`}
+                                    >
+                                        <svg
+                                            className="w-5 h-5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                            <path
+                                                d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </span>
+                                    <span
+                                        className={`ml-2 text-sm tracking-wide truncate ${
+                                            !isExpanded && "hidden"
+                                        }`}
+                                    >
+                                        Users
+                                    </span>
+                                </a>
+                            </li>
+                        ) : null}
                     </ul>
                 </div>
 
@@ -172,9 +220,7 @@ export const Sidebar = () => {
                         <p className="text-sm font-medium text-gray-800">
                             {user?.name}
                         </p>
-                        <p className="text-sm text-gray-500">
-                            {user?.email}
-                        </p>
+                        <p className="text-sm text-gray-500">{user?.email}</p>
                     </div>
                 </div>
             </div>

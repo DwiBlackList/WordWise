@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
 class UsersController extends Controller
 {
 
-    
+
     /**
      * Display a listing of the resource.
      * Mengambil semua data user
@@ -18,7 +19,8 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json($users);
+    return view('usersCRUD', ['users' => $users->toJson()]);
+
     }
 
     /**
@@ -46,11 +48,11 @@ class UsersController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'school' => $request->school,
-            'role' => $request->role,
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'school' => $request->input('school'),
+            'role' => $request->input('role'),
         ]);
 
         return response()->json([

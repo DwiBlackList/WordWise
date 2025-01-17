@@ -46,13 +46,13 @@ const Table: React.FC<TableProps> = ({ data }) => {
             <table className="table-auto w-full border-collapse shadow-xl">
                 <thead className="bg-white border-b border-gray-200">
                     <tr>
-                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3">
                             Level Name
                         </th>
-                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600">
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3">
                             Chapter Name
                         </th>
-                        <th className="px-2 sm:px-4 py-2 text-center text-gray-600">
+                        <th className="px-2 sm:px-4 py-2 text-center text-gray-600 w-1/6">
                             Action
                         </th>
                     </tr>
@@ -74,7 +74,11 @@ const Table: React.FC<TableProps> = ({ data }) => {
                                     className="text-gray-500 transition duration-200"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        if (window.confirm(`Are you sure you want to delete ${row.level_name}?`)) {
+                                        if (
+                                            window.confirm(
+                                                `Are you sure you want to delete ${row.level_name}?`
+                                            )
+                                        ) {
                                             handleDelete(row.id);
                                         }
                                     }}
