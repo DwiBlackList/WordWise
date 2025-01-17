@@ -12,9 +12,8 @@ export const Sidebar = () => {
 
     const handleLogout = async () => {
         try {
-
-            await axios.post('/logout');
-            window.location.href = '/login';
+            await axios.post("/logout");
+            window.location.href = "/login";
         } catch (error) {
             // Handle logout error
         }

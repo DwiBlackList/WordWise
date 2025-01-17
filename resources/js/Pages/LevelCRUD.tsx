@@ -1,8 +1,12 @@
-import Table from "../components/dashboard/ClassesCRUD";
+import Table from "../components/dashboard/LevelCRUD";
 import { Sidebar } from "../components/dashboard/Sidebar";
 import React, { useEffect, useState } from "react";
-const TableCRUD = ({ initialData }) => {
-    const [data, setData] = useState(initialData);
+const TableCRUD = ({ classState, levelState }) => {
+    const [data, setData] = useState({
+        classData: classState,
+        levelData: levelState,
+    });
+
     // useEffect(() => {
     //     const fetchData = async () => {
     //         if (!data.lenght) {

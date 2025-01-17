@@ -43,7 +43,7 @@ const Page: React.FC<PageProps> = ({ data }) => {
     };
     return (
         <div className="flex flex-col h-screen overflow-y-auto bg-gray-100 p-4">
-            <ReportsComponent name="Table" />
+            <ReportsComponent name="Class" />
             <Box sx={{ flexGrow: 1 }}>
                 {/* <Grid container spacing={2}>
                     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
