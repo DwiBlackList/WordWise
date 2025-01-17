@@ -2,9 +2,11 @@ import { useState } from "react";
 import { PanelRightOpen, PanelRightClose } from "lucide-react";
 import React from "react";
 import axios from "axios";
+import { useAuth } from "../../hooks/auth"; // Import the custom hook to get auth data
 
 export const Sidebar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const { user } = useAuth(); // Get the authenticated user data
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
@@ -168,10 +170,10 @@ export const Sidebar = () => {
                     />
                     <div className={`ml-3 ${!isExpanded && "hidden"}`}>
                         <p className="text-sm font-medium text-gray-800">
-                            goji nama panjang
+                            {user?.name}
                         </p>
                         <p className="text-sm text-gray-500">
-                            goji@example.com
+                            {user?.email}
                         </p>
                     </div>
                 </div>

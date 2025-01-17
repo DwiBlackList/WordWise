@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\LevelsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,3 +30,5 @@ Route::get('/editor/{class_id}', [LevelsController::class, 'create'])->name('edi
 
 Route::resource('classes', ClassesController::class);
 Route::resource('levels', LevelsController::class);
+Route::resource('users', UsersController::class);
+Route::get('data/users/login', [UsersController::class, 'dataUserLogin']);
