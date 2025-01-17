@@ -26,6 +26,12 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = Auth::user();
+        if ($user->role === 'student') {
+            Auth::logout();
+            return redirect()->route('login')->with('alert', 'Students cannot log in.');
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('home', absolute: false));
