@@ -23,6 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth', 'admins'])->group(function () {
+    // Route::get('/your-controller-route', [YourController::class, 'yourMethod']);
+    Route::resource('users', UsersController::class);
+    // Add other routes that require admin access here
+});
+
 require __DIR__.'/auth.php';
 
 // Route::get('/editor', [EditorController::class, 'index']);
@@ -30,5 +36,4 @@ Route::get('/editor/{class_id}', [LevelsController::class, 'create'])->name('edi
 
 Route::resource('classes', ClassesController::class);
 Route::resource('levels', LevelsController::class);
-Route::resource('users', UsersController::class);
-Route::get('data/users/login', [UsersController::class, 'dataUserLogin']);
+Route::get('data/users/login', [Controller::class, 'dataUserLogin']);
