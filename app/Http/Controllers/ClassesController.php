@@ -120,6 +120,7 @@ class ClassesController extends Controller
         $class->delete();
 
         // Redirect ke halaman sebelumnya dengan pesan sukses
-        return redirect()->route('classes.index')->with('success', 'Class deleted successfully.');
+        // return redirect()->route('classes.index')->with('success', 'Class deleted successfully.');
+        return response()->json(['success' => 'Class deleted successfully'], 201);
     }
 }

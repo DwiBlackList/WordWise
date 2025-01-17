@@ -36,6 +36,20 @@ const Table: React.FC<TableProps> = ({ data }) => {
         }
     };
 
+    const handleDelete = async (id: string) => {
+        try {
+            const response = await axios.delete(`/classes/${id}`);
+            if (response.status === 201) {
+                console.log("Class deleted successfully");
+                window.location.reload();
+            } else {
+                console.error("Failed to delete class");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setSelectedRow(null);
@@ -77,7 +91,9 @@ const Table: React.FC<TableProps> = ({ data }) => {
                                     className="text-gray-500 transition duration-200"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        alert(`Delete row ${row.id + 1}`);
+                                        if (window.confirm(`Are you sure you want to delete ${row.class_name}?`)) {
+                                            handleDelete(row.id);
+                                        }
                                     }}
                                 >
                                     <FaRegTrashCan />

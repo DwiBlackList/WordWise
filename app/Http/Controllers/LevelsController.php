@@ -84,6 +84,7 @@ class LevelsController extends Controller
         $class->delete();
 
         // Redirect ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Class deleted successfully.');
+        // return redirect()->back()->with('success', 'Class deleted successfully.');
+        return response()->json(['success' => 'Level deleted successfully'], 201);
     }
 }
