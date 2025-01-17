@@ -79,12 +79,12 @@ const Page: React.FC<PageProps> = ({ data }) => {
                     mt={2}
                 >
                     <div className="flex justify-center items-center w-full">
-                        <button
-                            onClick={handleOpenModal}
-                            className="bg-white w-full text-blue-500 border rounded-full px-4 py-2 hover:bg-blue-50 transition duration-200 focus:outline-none"
+                        <a
+                            href={`/editor/${data.classData.id}`}
+                            className="bg-white w-full text-blue-500 border rounded-full px-4 py-2 hover:bg-blue-50 transition duration-200 focus:outline-none text-center"
                         >
                             Add Data +
-                        </button>
+                        </a>
                         <Modal
                             isOpen={isModalOpen}
                             onClose={handleCloseModal}
