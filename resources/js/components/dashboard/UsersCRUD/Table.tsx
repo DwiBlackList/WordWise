@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
 import Modal from "./modal";
+import ModalEdit from "./modalEdit";
 import axios from "axios";
 
 interface TableProps {
@@ -19,8 +20,37 @@ const Table: React.FC<TableProps> = ({ data }) => {
         token: string;
     } | null>(null);
 
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editData, setEditData] = useState<{
+        name: string;
+        school: string;
+        password: string;
+        role: string;
+    } | null>(null);
+
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
+
+    const handleOpenEditModal = (row: any) => {
+        setEditData(row);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => setIsEditModalOpen(false);
+
+    const handleConfirmEdit = async (formData: any) => {
+        try {
+            const response = await axios.put(`/users/${formData.id}`, formData);
+            if (response.status === 200) {
+                console.log("User updated successfully");
+                window.location.reload();
+            } else {
+                console.error("Failed to update user");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
     const handleDelete = async (id: string) => {
         try {
@@ -84,7 +114,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
                                         className="text-gray-500 transition duration-200"
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            alert(`Edit ${row.name}`);
+                                            handleOpenEditModal(row);
                                         }}
                                     >
                                         <FaPencil />
@@ -110,6 +140,14 @@ const Table: React.FC<TableProps> = ({ data }) => {
                     ))}
                 </tbody>
             </table>
+            {isEditModalOpen && editData && (
+                <ModalEdit
+                    isOpen={isEditModalOpen}
+                    onClose={handleCloseEditModal}
+                    onConfirm={handleConfirmEdit}
+                    initialData={editData}
+                />
+            )}
         </div>
     );
 };

@@ -33,7 +33,7 @@ const Page: React.FC<PageProps> = ({ data }) => {
                 _token: csrfToken,
             });
 
-            if (response.status === 201) {
+            if (response.status === 200) {
                 console.log("Users added successfully");
                 window.location.reload();
             }

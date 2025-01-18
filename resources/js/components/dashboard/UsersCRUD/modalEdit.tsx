@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface ModalProps {
     isOpen: boolean;
@@ -17,13 +17,12 @@ interface ModalProps {
     };
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm }) => {
-    const [data, setData] = useState({
-        name: "",
-        school: "",
-        password: "",
-        role: "",
-    });
+const ModalEdit: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm, initialData }) => {
+    const [data, setData] = useState(initialData);
+
+    useEffect(() => {
+        setData(initialData);
+    }, [initialData]);
 
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -49,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm }) => {
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white rounded-lg p-6 w-96 shadow-lg">
-                <h2 className="text-xl mb-4 mx-4">Add New User</h2>
+                <h2 className="text-xl mb-4 mx-4">Edit User</h2>
                 <div className="flex items-center mb-4">
                     <div className="ml-4 w-full">
                         {/* Name Input */}
@@ -94,7 +93,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm }) => {
                             <option value="" disabled>
                                 Select Role
                             </option>
-                            <option value="admin">Admin</option>
+                            <option value="admins">Admin</option>
                             <option value="teacher">Teacher</option>
                             <option value="student">Student</option>
                         </select>
@@ -121,4 +120,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm }) => {
     );
 };
 
-export default Modal;
+export default ModalEdit;
