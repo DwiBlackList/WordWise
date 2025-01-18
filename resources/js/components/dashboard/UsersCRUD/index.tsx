@@ -46,8 +46,7 @@ const Page: React.FC<PageProps> = ({ data }) => {
                 _token: csrfToken,
             });
 
-            if (response.status === 201) {
-                window.location.reload();
+            if (response.status === 200) {
                 console.log("Users added successfully");
             }
         } catch (error) {
