@@ -1,55 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
-import Modal from "./modal";
-import axios from "axios";
 
 interface TableProps {
-    data: {
-        name: string;
-        school: string;
-        role: string;
-        token: string;
-    }[];
+    data: any;
+    handleEdit: (row: any) => void;
+    handleDelete: (id: number) => void;
 }
 
-const Table: React.FC<TableProps> = ({ data }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<{
-        class_name: string;
-        token: string;
-    } | null>(null);
-
-    const handleOpenModal = () => setIsModalOpen(true);
-    const handleCloseModal = () => setIsModalOpen(false);
-
-    const handleDelete = async (id: string) => {
-        try {
-            const response = await axios.delete(`/users/${id}`);
-            if (response.status === 200) {
-                console.log("Class deleted successfully");
-                window.location.reload();
-            } else {
-                console.error("Failed to delete class");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
-
-    const handleEdit = async (id: string) => {
-        try {
-            const response = await axios.put(`/users/${id}`);
-            if (response.status === 200) {
-                console.log("User update successfully");
-                window.location.reload();
-            } else {
-                console.error("Failed to update user");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
-
+const Table: React.FC<TableProps> = ({ data, handleEdit, handleDelete }) => {
     return (
         <div className="overflow-x-auto w-full">
             <table className="table-auto w-full border-collapse shadow-xl">
@@ -84,7 +42,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
                                         className="text-gray-500 transition duration-200"
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            alert(`Edit ${row.name}`);
+                                            handleEdit(row);
                                         }}
                                     >
                                         <FaPencil />

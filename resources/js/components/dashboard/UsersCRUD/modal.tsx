@@ -1,41 +1,43 @@
 import React, { useState, useEffect } from "react";
 
 interface ModalProps {
-    isOpen: boolean;
+    state: boolean;
+    isEdit: boolean;
     onClose: () => void;
     onConfirm: (formData: {
         name: string;
-        email: string;
+        email?: string;
         school: string;
         password: string;
         role: string;
     }) => void;
-    initialData?: {
+    initialData: {
         name: string;
-        email: string;
-        school: string;
         password: string;
+        school: string;
         role: string;
     };
 }
 
 const Modal: React.FC<ModalProps> = ({
-    isOpen,
-    onClose,
     onConfirm,
     initialData,
+    state,
+    onClose,
+    isEdit,
 }) => {
-    const [data, setData] = useState({
+    const [dataAdd, setDataAdd] = useState({
         name: "",
         email: "",
         school: "",
         password: "",
         role: "",
     });
+    const [dataEdit, setDataEdit] = useState(initialData);
 
     useEffect(() => {
         if (initialData) {
-            setData(initialData);
+            setDataEdit(initialData);
         }
     }, [initialData]);
 
@@ -43,7 +45,7 @@ const Modal: React.FC<ModalProps> = ({
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        setData((prevData) => ({
+        setDataEdit((prevData) => ({
             ...prevData,
             [name]: value,
         }));
@@ -51,11 +53,16 @@ const Modal: React.FC<ModalProps> = ({
 
     const validateInput = () => {
         if (
-            !data.name ||
-            !data.email ||
-            !data.school ||
-            !data.password ||
-            !data.role
+            state == false
+                ? !dataAdd.name ||
+                  !dataAdd.email ||
+                  !dataAdd.school ||
+                  !dataAdd.password ||
+                  !dataAdd.role
+                : !dataEdit.name ||
+                  !dataEdit.school ||
+                  !dataEdit.password ||
+                  !dataEdit.role
         ) {
             alert("Please fill in all fields");
             return false;
@@ -64,7 +71,10 @@ const Modal: React.FC<ModalProps> = ({
         return true;
     };
 
-    if (!isOpen) return null;
+    console.log("dataAdd: ", dataAdd);
+    console.log("dataEdit: ", dataEdit);
+
+    if (!state) return null;
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -76,27 +86,28 @@ const Modal: React.FC<ModalProps> = ({
                         <input
                             type="text"
                             name="name"
-                            value={data.name}
+                            value={dataEdit.name}
                             onChange={handleInputChange}
                             className="text-lg font-semibold rounded-lg border-gray-300 w-full focus:outline-none focus:border-blue-500 mb-4"
                             placeholder="User Name"
                             required
                         />
                         {/* Email Input */}
-                        <input
-                            type="text"
-                            name="email"
-                            value={data.email}
-                            onChange={handleInputChange}
-                            className="text-lg font-semibold rounded-lg border-gray-300 w-full focus:outline-none focus:border-blue-500 mb-4"
-                            placeholder="Email"
-                            required
-                        />
+                        {isEdit ? null : (
+                            <input
+                                type="email"
+                                name="email"
+                                onChange={handleInputChange}
+                                className="text-lg font-semibold rounded-lg border-gray-300 w-full focus:outline-none focus:border-blue-500 mb-4"
+                                placeholder="Email"
+                                required
+                            />
+                        )}
                         {/* School Input */}
                         <input
                             type="text"
                             name="school"
-                            value={data.school}
+                            value={dataEdit.school}
                             onChange={handleInputChange}
                             className="text-lg font-semibold rounded-lg border-gray-300 w-full focus:outline-none focus:border-blue-500 mb-4"
                             placeholder="School Name"
@@ -106,7 +117,7 @@ const Modal: React.FC<ModalProps> = ({
                         <input
                             type="password"
                             name="password"
-                            value={data.password}
+                            value={dataEdit.password}
                             onChange={handleInputChange}
                             className="text-lg font-semibold rounded-lg border-gray-300 w-full focus:outline-none focus:border-blue-500 mb-4"
                             placeholder="Password"
@@ -115,7 +126,7 @@ const Modal: React.FC<ModalProps> = ({
                         {/* Role Dropdown */}
                         <select
                             name="role"
-                            value={data.role}
+                            value={dataEdit.role}
                             onChange={handleInputChange}
                             className="text-lg font-semibold rounded-lg border-gray-300 w-full focus:outline-none focus:border-blue-500 mb-4"
                             required
@@ -123,7 +134,7 @@ const Modal: React.FC<ModalProps> = ({
                             <option value="" disabled>
                                 Select Role
                             </option>
-                            <option value="admin">Admin</option>
+                            <option value="admins">Admin</option>
                             <option value="teacher">Teacher</option>
                             <option value="student">Student</option>
                         </select>
@@ -138,7 +149,11 @@ const Modal: React.FC<ModalProps> = ({
                     </button>
                     <button
                         onClick={() =>
-                            validateInput() ? onConfirm(data) : null
+                            validateInput()
+                                ? state == true
+                                    ? onConfirm(dataEdit)
+                                    : onConfirm(dataAdd)
+                                : null
                         }
                         className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring focus:ring-blue-300"
                     >
