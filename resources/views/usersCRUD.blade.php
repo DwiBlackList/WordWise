@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div id="app" users="{{ $users }}"></div>
+    <div id="app" users="{{ $ssrData }}"></div>
 </body>
 
 </html>

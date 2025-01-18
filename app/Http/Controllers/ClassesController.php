@@ -22,8 +22,16 @@ class ClassesController extends Controller
     public function index()
     {
         $userId = Auth::id();
+        $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
         $data = Classes::where('user_id', $userId)->get();
-        $ssrData = json_encode($data);
+
+        // Combine data
+        $combinedData = [
+            'classes' => $data,
+            'user' => $dataUserLogin
+        ];
+
+        $ssrData = json_encode($combinedData);
         return view('table', compact('ssrData'));
     }
 

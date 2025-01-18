@@ -3,7 +3,8 @@ import { Sidebar } from "../components/dashboard/Sidebar";
 import React, { useEffect, useState } from "react";
 const TableCRUD = ({ initialData }) => {
     const [data, setData] = useState({
-        users: initialData || [],
+        users: initialData.users || [],
+        dataUserLogin: initialData.dataUserLogin || [],
     });
 
     // useEffect(() => {
@@ -37,10 +38,10 @@ const TableCRUD = ({ initialData }) => {
 
     return (
         <div className="flex h-screen overflow-hidden">
-            <Sidebar />
+            <Sidebar user={data.dataUserLogin} />
             <div className="relative flex flex-col flex-1 overflow-x-hidden">
                 <main>
-                    <Table data={data} />
+                    <Table data={data.users} />
                 </main>
             </div>
         </div>

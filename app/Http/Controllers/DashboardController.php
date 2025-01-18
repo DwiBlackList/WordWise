@@ -27,7 +27,7 @@ class DashboardController extends Controller
         //     return (int) explode('/', $result->score)[0];
         // });
         // dd($levels);
-
+        $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
         $weakestTopics = app(DashboardController::class)->Weakness()->getData();
         $strongestTopics = app(DashboardController::class)->Strength()->getData();
         $leaders = app(DashboardController::class)->Leadboard()->getData();
@@ -35,6 +35,8 @@ class DashboardController extends Controller
         $currentKnowledge = app(DashboardController::class)->CurrentKnowledge()->getData();
 
         $ListClass = $this->ListClass();
+        $FirstClass = $ListClass->getData()[0];
+
         // dd($ListClass);
 
         return view('dashboard', [
@@ -43,7 +45,11 @@ class DashboardController extends Controller
                 'strongestTopics' => $strongestTopics->strongestTopics ?? [],
                 'leaders' => $leaders->leaders ?? [],
                 'activity' => $activity->activity ?? [],
-                'currentKnowledge' => $currentKnowledge,
+                'currentKnowledge' => $currentKnowledge ?? [],
+                'listClass' => $ListClass->original ?? [],
+                'firstClass' => $FirstClass ?? [],
+                'dataUserLogin' => $dataUserLogin ?? [],
+
             ]),
         ]);
     }

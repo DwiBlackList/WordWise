@@ -14,6 +14,7 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
+    console.log(data);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState<{
         class_name: string;
@@ -100,7 +101,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.users?.map((row, index) => (
+                    {data?.map((row, index) => (
                         <tr
                             key={index}
                             className="bg-white cursor-pointer hover:bg-gray-100"
