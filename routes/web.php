@@ -26,7 +26,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admins'])->group(function () {
     // Route::get('/your-controller-route', [YourController::class, 'yourMethod']);
     Route::resource('users', UsersController::class);
-    // Add other routes that require admin access here
+
+    // Route:: Add other routes th    at     require admin access here
 });
 
 require __DIR__.'/auth.php';
