@@ -69,7 +69,7 @@ class DashboardController extends Controller
         return response()->json($FirstClass);
     }
 
-    public function Leadboarda()
+    public function Top5()
     {
         $firstClass = $this->FirstClass()->getData();
         if ($firstClass) {
@@ -91,7 +91,40 @@ class DashboardController extends Controller
                     'rank' => $totalScoreCount,
                 ];
             })->sortBy('rank')->values()->take(5);
-            dd($leaders);
+            // dd($leaders);
+            return response()->json([
+                'leaders' => $leaders
+            ]);
+        } else {
+            return response()->json([
+                'leaders' => []
+            ]);
+        }
+    }
+
+    public function Top5FromBack()
+    {
+        $firstClass = $this->FirstClass()->getData();
+        if ($firstClass) {
+            $classId = $firstClass->id;
+
+            $users = User::whereHas('joinedclass', function ($query) use ($classId) {
+                $query->where('class_id', $classId);
+            })->with(['results' => function ($query) {
+                $query->with('level');
+            }])->get();
+
+            $leaders = $users->map(function ($user) {
+                $totalScoreCount = $user->results->reduce(function ($carry, $result) {
+                    return $carry + count(json_decode($result->score, true));
+                }, 0);
+
+                return [
+                    'name' => $user->name,
+                    'rank' => $totalScoreCount,
+                ];
+            })->sortByDesc('rank')->values()->take(5);
+            // dd($leaders);
             return response()->json([
                 'leaders' => $leaders
             ]);
