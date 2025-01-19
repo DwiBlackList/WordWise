@@ -9,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 
 const App = ({ data }) => {
-    console.log(data);
     return (
         <div className="flex flex-col w-full h-screen overflow-y-auto bg-gray-100 p-4">
             <Header data={data.listClass} />
@@ -45,13 +44,13 @@ const App = ({ data }) => {
                     <Grid size={{ xs: 12, md: 6 }}>
                         <Leaderboard
                             title="Top first 5"
-                            leaders={data.leaders}
+                            leaders={data.topFirst5}
                         />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <Leaderboard
                             title="Worst last 5"
-                            leaders={data.leaders}
+                            leaders={data.topFirst5}
                         />
                     </Grid>
                 </Grid>

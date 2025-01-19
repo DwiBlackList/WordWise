@@ -33,7 +33,6 @@ interface LineChartProps {
 }
 
 function LineChart({ data }: LineChartProps) {
-    console.log(data);
     const [chart, setChart] = useState<Chart | null>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { currentTheme } = useThemeProvider();

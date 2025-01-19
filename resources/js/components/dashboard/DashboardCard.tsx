@@ -4,7 +4,6 @@ import { chartAreaGradient } from "./charts/ChartConfig";
 import { tailwindConfig, hexToRGB } from "../../utils/utils";
 
 function DashboardCard({ data }) {
-    console.log(data);
     const chartData = {
         labels: Object.keys(data.activity),
         datasets: [

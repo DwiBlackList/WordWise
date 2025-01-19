@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <div id="app" class="{{ $class }}" levels="{{ $levels }}"></div>
+    <div id="app" ssrData="{{ $ssrData }}">
+    </div>
 </body>
 
 </html>

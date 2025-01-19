@@ -14,7 +14,6 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
-    console.log(data);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState<{
         class_name: string;

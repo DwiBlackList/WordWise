@@ -12,7 +12,6 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({ data }) => {
-    console.log(data);
     const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
     const csrfToken = csrfTokenElement
         ? csrfTokenElement.getAttribute("content")
@@ -21,14 +20,11 @@ const Page: React.FC<PageProps> = ({ data }) => {
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
     const handleConfirm = async (formData: { class_name: string }) => {
-        console.log("formData: ", formData);
         try {
             const response = await axios.post("/classes", {
                 ...formData,
                 _token: csrfToken,
             });
-
-            console.log("data: ", response.data);
 
             if (response.status === 201) {
                 console.log("Class added successfully");

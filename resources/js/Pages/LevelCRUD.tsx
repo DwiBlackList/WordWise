@@ -1,10 +1,11 @@
 import Table from "../components/dashboard/LevelCRUD";
 import { Sidebar } from "../components/dashboard/Sidebar";
 import React, { useEffect, useState } from "react";
-const TableCRUD = ({ classState, levelState }) => {
+const TableCRUD = ({ ssrData }) => {
     const [data, setData] = useState({
-        classData: classState,
-        levelData: levelState,
+        classData: ssrData.class,
+        levelData: ssrData.levels,
+        dataUserLogin: ssrData.dataUserLogin,
     });
 
     // useEffect(() => {
@@ -38,7 +39,7 @@ const TableCRUD = ({ classState, levelState }) => {
 
     return (
         <div className="flex h-screen overflow-hidden">
-            <Sidebar />
+            <Sidebar user={data.dataUserLogin} />
             <div className="relative flex flex-col flex-1 overflow-x-hidden">
                 <main>
                     <Table data={data} />

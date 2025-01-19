@@ -85,9 +85,21 @@ class ClassesController extends Controller
             abort(401, 'Unauthorized access');
         }
 
+        $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
+
         $class = Classes::findOrFail($id);
         $levels = Levels::where('class_id', $id)->get();
-        return view('levelCRUD', compact('class' , 'levels'));
+
+        $combinedData = [
+            'class' => $class,
+            'levels' => $levels,
+            'dataUserLogin' => $dataUserLogin
+        ];
+
+        $ssrData = json_encode($combinedData);
+
+
+        return view('levelCRUD', compact('ssrData'));
     }
 
     /**

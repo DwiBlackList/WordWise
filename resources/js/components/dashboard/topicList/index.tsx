@@ -4,6 +4,7 @@ import ProgressBarStrongest from "./ProgressBarStrongest";
 
 interface Topic {
     percentage: number;
+    topic: string;
 }
 
 interface TopicsListProps {
@@ -20,13 +21,13 @@ const TopicsList: React.FC<TopicsListProps> = ({ title, topics }) => {
                     title === "Strongest Topics" ? (
                         <ProgressBarStrongest
                             key={i}
-                            label={`Topic #${i + 1}`}
+                            label={`Topic #${topic.topic}`}
                             percentage={topic.percentage}
                         />
                     ) : (
                         <ProgressBarWeakest
                             key={i}
-                            label={`Topic #${i + 1}`}
+                            label={`Topic #${topic.topic}`}
                             percentage={topic.percentage}
                         />
                     )

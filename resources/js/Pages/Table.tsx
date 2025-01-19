@@ -3,7 +3,6 @@ import { Sidebar } from "../components/dashboard/Sidebar";
 import React, { useEffect, useState } from "react";
 const TableCRUD = ({ initialData }) => {
     const [data, setData] = useState(initialData);
-    console.log(data);
     // useEffect(() => {
     //     const fetchData = async () => {
     //         if (!data.lenght) {
