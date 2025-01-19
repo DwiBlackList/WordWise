@@ -11,26 +11,19 @@ import Grid from "@mui/material/Grid2";
 const App = ({ data }) => {
     return (
         <div className="flex flex-col w-full h-screen overflow-y-auto bg-gray-100 p-4">
-            <Header />
+            <Header data={data.listClass} />
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2} alignItems="stretch">
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <Grid container spacing={2}>
-                            <Grid size={{ xs: 12, sm: 6 }} height="200px">
-                                <Card label="Card Label" value="n/a" />
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 6 }} height="200px">
-                                <Card label="Card Label" value="n/a" />
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 4 }}>
-                                <DashboardCard data={data.currentKnowledge} />
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 4 }}>
-                                <DashboardCard data={data.currentKnowledge} />
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 4 }}>
-                                <DashboardCard data={data.currentKnowledge} />
-                            </Grid>
+                    <Grid container size={{ xs: 12, md: 6 }}>
+                        <Grid
+                            size={{ xs: 12, sm: 12 }}
+                            height="100%"
+                            width="100%"
+                        >
+                            <Card
+                                className={data.firstClass.class_name}
+                                token={data.firstClass.token}
+                            />
                         </Grid>
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>

@@ -17,7 +17,12 @@ interface ModalProps {
     };
 }
 
-const ModalEdit: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm, initialData }) => {
+const ModalEdit: React.FC<ModalProps> = ({
+    isOpen,
+    onClose,
+    onConfirm,
+    initialData,
+}) => {
     const [data, setData] = useState(initialData);
 
     useEffect(() => {

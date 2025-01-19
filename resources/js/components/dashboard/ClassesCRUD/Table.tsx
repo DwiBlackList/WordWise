@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
+import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
 import Modal from "./modal";
 import axios from "axios";
 
@@ -78,26 +78,36 @@ const Table: React.FC<TableProps> = ({ data }) => {
                             className="bg-white  hover:bg-gray-100"
                         >
                             <td className="px-2 sm:px-4 py-2 ">
-                                <a
-                                    onClick={() => handleRowClick(row.id)}
-                                    className="cursor-pointer"
-                                >
-                                    {row.class_name}
-                                </a>
+                                {row.class_name}
                             </td>
                             <td className="px-2 sm:px-4 py-2">{row.token}</td>
                             <td className="px-2 sm:px-4 py-2 text-center">
-                                <button
-                                    className="text-gray-500 transition duration-200"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        if (window.confirm(`Are you sure you want to delete ${row.class_name}?`)) {
-                                            handleDelete(row.id);
-                                        }
-                                    }}
-                                >
-                                    <FaRegTrashCan />
-                                </button>
+                                <div className="flex gap-4 justify-center">
+                                    <button
+                                        className="text-gray-500 transition duration-200"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleRowClick(row.id);
+                                        }}
+                                    >
+                                        <FaPencil />
+                                    </button>
+                                    <button
+                                        className="text-gray-500 transition duration-200"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (
+                                                window.confirm(
+                                                    `Are you sure you want to delete ${row.class_name}?`
+                                                )
+                                            ) {
+                                                handleDelete(row.id);
+                                            }
+                                        }}
+                                    >
+                                        <FaRegTrashCan />
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     ))}

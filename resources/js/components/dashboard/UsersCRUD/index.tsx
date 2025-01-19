@@ -17,9 +17,22 @@ const Page: React.FC<PageProps> = ({ data }) => {
         ? csrfTokenElement.getAttribute("content")
         : "";
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleOpenModal = () => setIsModalOpen(true);
+    const [selectedRow, setSelectedRow] = useState({
+        name: "",
+        school: "",
+        password: "",
+        role: "",
+    });
+    const [isEdit, setIsEdit] = useState(false);
+    const handleOpenModal = () => {
+        setIsEdit(false);
+        setSelectedRow(selectedRow);
+        setIsModalOpen(true);
+    };
+
     const handleCloseModal = () => setIsModalOpen(false);
-    const handleConfirm = async (formData: {
+
+    const handleAddData = async (formData: {
         name: string;
         email: string;
         school: string;
@@ -35,44 +48,71 @@ const Page: React.FC<PageProps> = ({ data }) => {
 
             if (response.status === 200) {
                 console.log("Users added successfully");
+            }
+        } catch (error) {
+            console.error(error);
+            // alert(error.response.data.message);
+        }
+
+        setIsModalOpen(false);
+    };
+
+    const handleEditData = async (
+        row: any,
+        formData: {
+            name: string;
+            school: string;
+            password: string;
+            role: string;
+        }
+    ) => {
+        try {
+            const response = await axios.put(`/users/${row.id}`, {
+                ...formData,
+                _token: csrfToken,
+            });
+
+            if (response.status === 200) {
+                window.location.reload();
+                console.log("Users edited successfully");
+            }
+        } catch (error) {
+            console.error(error);
+            // alert(error.response.data.message);
+        }
+
+        setIsModalOpen(false);
+    };
+
+    const handleConfirm = (data) => {
+        isEdit ? handleEditData(data, data) : handleAddData(data);
+    };
+
+    const handleEdit = (row: any) => {
+        setSelectedRow(row);
+        setIsModalOpen(true);
+        setIsEdit(true);
+    };
+
+    const handleDelete = async (id: number) => {
+        try {
+            const response = await axios.delete(`/users/${id}`, {
+                data: { _token: csrfToken },
+            });
+
+            if (response.status === 200) {
+                console.log("User deleted successfully");
                 window.location.reload();
             }
         } catch (error) {
             alert(error.response.data.message);
         }
-
-        setIsModalOpen(false);
     };
+
     return (
         <div className="flex flex-col h-screen overflow-y-auto bg-gray-100 p-4">
             <ReportsComponent name="Users" />
             <Box sx={{ flexGrow: 1 }}>
-                {/* <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-                        <ProgressCard
-                            level={data.levelProgress.level}
-                            progress={data.levelProgress.progress}
-                            current={data.levelProgress.current}
-                            total={data.levelProgress.total}
-                        />
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-                        <ProgressCard
-                            level={data.levelProgress.level}
-                            progress={data.levelProgress.progress}
-                            current={data.levelProgress.current}
-                            total={data.levelProgress.total}
-                        />
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-                        <ProgressCard
-                            level={data.levelProgress.level}
-                            progress={data.levelProgress.progress}
-                            current={data.levelProgress.current}
-                            total={data.levelProgress.total}
-                        />
-                    </Grid>
-                </Grid> */}
                 <Grid
                     container
                     justifyContent="center"
@@ -87,16 +127,22 @@ const Page: React.FC<PageProps> = ({ data }) => {
                             Add Data +
                         </button>
                         <Modal
-                            isOpen={isModalOpen}
+                            state={isModalOpen}
                             onClose={handleCloseModal}
                             onConfirm={handleConfirm}
+                            initialData={selectedRow}
+                            isEdit={isEdit}
                         />
                     </div>
                 </Grid>
                 <Grid container mt={2}>
                     <Grid size={{ xs: 12 }}>
                         <div className="p-4 bg-white rounded-xl">
-                            <TableComponent data={data} />
+                            <TableComponent
+                                data={data}
+                                handleEdit={handleEdit}
+                                handleDelete={handleDelete}
+                            />
                         </div>
                     </Grid>
                 </Grid>

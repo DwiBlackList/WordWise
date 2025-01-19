@@ -19,8 +19,14 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-    return view('usersCRUD', ['users' => $users->toJson()]);
+        $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
 
+        $combinedData = [
+            'users' => $users,
+            'dataUserLogin' => $dataUserLogin
+        ];
+
+        return view('usersCRUD', ['ssrData' => json_encode($combinedData)]);
     }
 
     /**

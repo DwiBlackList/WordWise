@@ -4,16 +4,13 @@ import React from "react";
 import axios from "axios";
 import { useAuth } from "../../hooks/auth"; // Import the custom hook to get auth data
 
-export const Sidebar = () => {
+export const Sidebar = ({ user }) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const { user } = useAuth(); // Get the authenticated user data
     // const HandleUsersAdmins = () => {
     //     try{
     //         await axios.get("/users")
     //     }
     // };
-
-    console.log(user);
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
