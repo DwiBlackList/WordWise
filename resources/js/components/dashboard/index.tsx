@@ -50,7 +50,7 @@ const App = ({ data }) => {
                     <Grid size={{ xs: 12, md: 6 }}>
                         <Leaderboard
                             title="Worst last 5"
-                            leaders={data.topFirst5}
+                            leaders={data.topLast5}
                         />
                     </Grid>
                 </Grid>
