@@ -82,16 +82,29 @@ class DashboardController extends Controller
             }])->get();
 
             $leaders = $users->map(function ($user) {
-                $totalScoreCount = $user->results->reduce(function ($carry, $result) {
-                    return $carry + count(json_decode($result->score, true));
-                }, 0);
+                $totalScoreObtained = 0;
+                $totalScoreAvailable = 0;
+
+                $user->results->each(function ($result) use (&$totalScoreObtained, &$totalScoreAvailable) {
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+
+                    $totalScoreObtained += $scoreObtained;
+                    $totalScoreAvailable += $scoreAvailable;
+                });
+
+                $accuracy = $totalScoreAvailable > 0 ? ($totalScoreObtained / $totalScoreAvailable) * 100 : 0;
 
                 return [
                     'name' => $user->name,
-                    'rank' => $totalScoreCount,
+                    'totalscore' => $totalScoreObtained,
+                    'accuracy' => round($accuracy, 2), // Rounded to 2 decimal places
                 ];
-            })->sortBy('rank')->values()->take(5);
+            })->sortByDesc('totalscore')->values()->take(5);
+
             // dd($leaders);
+
             return response()->json([
                 'leaders' => $leaders
             ]);
@@ -115,16 +128,29 @@ class DashboardController extends Controller
             }])->get();
 
             $leaders = $users->map(function ($user) {
-                $totalScoreCount = $user->results->reduce(function ($carry, $result) {
-                    return $carry + count(json_decode($result->score, true));
-                }, 0);
+                $totalScoreObtained = 0;
+                $totalScoreAvailable = 0;
+
+                $user->results->each(function ($result) use (&$totalScoreObtained, &$totalScoreAvailable) {
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+
+                    $totalScoreObtained += $scoreObtained;
+                    $totalScoreAvailable += $scoreAvailable;
+                });
+
+                $accuracy = $totalScoreAvailable > 0 ? ($totalScoreObtained / $totalScoreAvailable) * 100 : 0;
 
                 return [
                     'name' => $user->name,
-                    'rank' => $totalScoreCount,
+                    'totalscore' => $totalScoreObtained,
+                    'accuracy' => round($accuracy, 2), // Rounded to 2 decimal places
                 ];
-            })->sortByDesc('rank')->values()->take(5);
+            })->sortBy('totalscore')->values()->take(5);
+
             // dd($leaders);
+
             return response()->json([
                 'leaders' => $leaders
             ]);
