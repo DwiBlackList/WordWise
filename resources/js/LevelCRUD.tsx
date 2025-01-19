@@ -3,19 +3,14 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import LevelCRUD from "../js/Pages/LevelCRUD";
 
-const classState = JSON.parse(
-    document.getElementById("app")?.getAttribute("class")
-);
-
-const levelsState = JSON.parse(
-    document.getElementById("app")?.getAttribute("levels")
-);
+const ssrData = document.getElementById("app")?.getAttribute("ssrData");
+const initialData = ssrData ? JSON.parse(ssrData) : {};
 
 if (document.getElementById("app")) {
     ReactDOM.createRoot(document.getElementById("app")).render(
         <React.StrictMode>
             <BrowserRouter>
-                <LevelCRUD classState={classState} levelState={levelsState} />
+                <LevelCRUD ssrData={initialData} />
             </BrowserRouter>
         </React.StrictMode>
     );

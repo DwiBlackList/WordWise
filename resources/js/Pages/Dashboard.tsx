@@ -4,7 +4,6 @@ import { Sidebar } from "../components/dashboard/Sidebar";
 
 export const Dashboard = ({ initialData }) => {
     const [data, setData] = useState(initialData);
-    console.log(data);
     // useEffect(() => {
     //     // Client-side fetch untuk data yang belum diambil oleh server
     //     const fetchData = async () => {

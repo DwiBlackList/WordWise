@@ -5,7 +5,7 @@ import Leaderboard from "../dashboard/Leadboard";
 import DashboardCard from "../dashboard/DashboardCard";
 import SpentThisYearChart from "./yearStatisticCard.tsx";
 import { Box } from "@mui/material";
-import React, { act, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 
 const App = ({ data }) => {
@@ -27,7 +27,7 @@ const App = ({ data }) => {
                         </Grid>
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <SpentThisYearChart dataActivity={data.activity} />
+                        <DashboardCard data={data.currentKnowledge} />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <TopicsList
@@ -43,14 +43,14 @@ const App = ({ data }) => {
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <Leaderboard
-                            title="Groups Leaderboard"
-                            leaders={data.leaders}
+                            title="Top first 5"
+                            leaders={data.topFirst5}
                         />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <Leaderboard
-                            title="Groups Leaderboard"
-                            leaders={data.leaders}
+                            title="Worst last 5"
+                            leaders={data.topFirst5}
                         />
                     </Grid>
                 </Grid>

@@ -6,8 +6,6 @@ import Table from "../js/Pages/Table";
 const ssrData = document.getElementById("app")?.getAttribute("data-ssr");
 const initialData = ssrData ? JSON.parse(ssrData) : {};
 
-console.log("Initial Data:", initialData);
-
 if (document.getElementById("app")) {
     ReactDOM.createRoot(document.getElementById("app")).render(
         <React.StrictMode>

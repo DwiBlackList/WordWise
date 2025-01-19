@@ -71,9 +71,6 @@ const Modal: React.FC<ModalProps> = ({
         return true;
     };
 
-    console.log("dataAdd: ", dataAdd);
-    console.log("dataEdit: ", dataEdit);
-
     if (!state) return null;
 
     return (

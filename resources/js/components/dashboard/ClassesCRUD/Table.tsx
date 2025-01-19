@@ -26,7 +26,6 @@ const Table: React.FC<TableProps> = ({ data }) => {
         try {
             const response = await axios.get(`classes/${id}`);
             if (response.status === 200) {
-                console.log("Class data retrieved successfully");
                 window.location.href = `/classes/${id}`;
             } else {
                 console.error("Failed to retrieve class data");

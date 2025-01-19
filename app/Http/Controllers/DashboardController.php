@@ -32,11 +32,13 @@ class DashboardController extends Controller
         $weakestTopics = $this->Weakness()->getData();
         $strongestTopics = $this->Strength()->getData();
         $leaders = app(DashboardController::class)->Leadboard()->getData();
-        $activity = app(DashboardController::class)->ActivityLama()->getData();
-
+        $activity = app(DashboardController::class)->Activity()->getData();
+        $currentKnowledge = app(DashboardController::class)->Activity()->getData();
         // List Kelas Untuk menampilkan seluruh kelas yang ada pada user tersebut , digunakan untuk ngelink dropdown
         $ListClass = $this->ListClass();
         $FirstClass = $this->FirstClass()->getData();
+        $topFirst5 = $this->Top5()->getData();
+        $topLast5 = $this->Top5FromBack()->getData();
 
         return view('dashboard', [
             'ssrData' => json_encode([
@@ -48,6 +50,8 @@ class DashboardController extends Controller
                 'listClass' => $ListClass->original ?? [],
                 'firstClass' => $FirstClass ?? [],
                 'dataUserLogin' => $dataUserLogin ?? [],
+                'topFirst5' => $topFirst5->leaders ?? [],
+                'topLast5' => $topLast5->leaders ?? [],
 
             ]),
         ]);
@@ -259,7 +263,7 @@ class DashboardController extends Controller
                 return \Carbon\Carbon::createFromFormat('m-Y', $a)->timestamp - \Carbon\Carbon::createFromFormat('m-Y', $b)->timestamp;
             });
 
-            dd($activity);
+            // dd($activity);
 
             return response()->json([
                 'activity' => $activity
@@ -269,27 +273,5 @@ class DashboardController extends Controller
                 'activity' => []
             ]);
         }
-    }
-
-    public function ActivityLama()
-    {
-        return response()->json(
-            [
-                'activity' => [
-                    110,
-                    120,
-                    100,
-                    250,
-                    280,
-                    300,
-                    200,
-                    230,
-                    230,
-                    350,
-                    380,
-                    400
-                ],
-            ],
-        );
     }
 }
