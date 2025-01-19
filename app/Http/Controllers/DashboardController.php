@@ -29,8 +29,8 @@ class DashboardController extends Controller
         // });
         // dd($levels);
         $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
-        $weakestTopics = app(DashboardController::class)->Weakness()->getData();
-        $strongestTopics = app(DashboardController::class)->Strength()->getData();
+        $weakestTopics = $this->Weakness()->getData();
+        $strongestTopics = $this->Strength()->getData();
         $leaders = app(DashboardController::class)->Leadboard()->getData();
         $activity = app(DashboardController::class)->Activity()->getData();
         $currentKnowledge = app(DashboardController::class)->Activity()->getData();
@@ -86,16 +86,29 @@ class DashboardController extends Controller
             }])->get();
 
             $leaders = $users->map(function ($user) {
-                $totalScoreCount = $user->results->reduce(function ($carry, $result) {
-                    return $carry + count(json_decode($result->score, true));
-                }, 0);
+                $totalScoreObtained = 0;
+                $totalScoreAvailable = 0;
+
+                $user->results->each(function ($result) use (&$totalScoreObtained, &$totalScoreAvailable) {
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+
+                    $totalScoreObtained += $scoreObtained;
+                    $totalScoreAvailable += $scoreAvailable;
+                });
+
+                $accuracy = $totalScoreAvailable > 0 ? ($totalScoreObtained / $totalScoreAvailable) * 100 : 0;
 
                 return [
                     'name' => $user->name,
-                    'rank' => $totalScoreCount,
+                    'totalscore' => $totalScoreObtained,
+                    'accuracy' => round($accuracy, 2), // Rounded to 2 decimal places
                 ];
-            })->sortBy('rank')->values()->take(5);
+            })->sortByDesc('totalscore')->values()->take(5);
+
             // dd($leaders);
+
             return response()->json([
                 'leaders' => $leaders
             ]);
@@ -119,16 +132,29 @@ class DashboardController extends Controller
             }])->get();
 
             $leaders = $users->map(function ($user) {
-                $totalScoreCount = $user->results->reduce(function ($carry, $result) {
-                    return $carry + count(json_decode($result->score, true));
-                }, 0);
+                $totalScoreObtained = 0;
+                $totalScoreAvailable = 0;
+
+                $user->results->each(function ($result) use (&$totalScoreObtained, &$totalScoreAvailable) {
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+
+                    $totalScoreObtained += $scoreObtained;
+                    $totalScoreAvailable += $scoreAvailable;
+                });
+
+                $accuracy = $totalScoreAvailable > 0 ? ($totalScoreObtained / $totalScoreAvailable) * 100 : 0;
 
                 return [
                     'name' => $user->name,
-                    'rank' => $totalScoreCount,
+                    'totalscore' => $totalScoreObtained,
+                    'accuracy' => round($accuracy, 2), // Rounded to 2 decimal places
                 ];
-            })->sortByDesc('rank')->values()->take(5);
+            })->sortBy('totalscore')->values()->take(5);
+
             // dd($leaders);
+
             return response()->json([
                 'leaders' => $leaders
             ]);
@@ -155,42 +181,68 @@ class DashboardController extends Controller
 
     public function Weakness()
     {
-        return response()->json([
-            'weakestTopics' => [
-                [
-                    'topic' => 'Error Topic #1',
-                    'percentage' => 74,
-                ],
-                [
-                    'topic' => 'Error Topic #2',
-                    'percentage' => 50,
-                ],
-                [
-                    'topic' => 'Error Topic #3',
-                    'percentage' => 74,
-                ],
-            ],
-        ]);
+        $firstClass = $this->FirstClass()->getData();
+        if ($firstClass) {
+            $classId = $firstClass->id;
+
+            $levels = Levels::where('class_id', $classId)->with('results')->get();
+
+            $weakestTopics = $levels->map(function ($level) {
+                $totalErrors = $level->results->reduce(function ($carry, $result) {
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+                    $errors = $scoreAvailable - $scoreObtained;
+                    return $carry + $errors;
+                }, 0);
+
+                return [
+                    'topic' => $level->level_name,
+                    'percentage' => $totalErrors,
+                ];
+            })->sortBy('percentage')->values()->take(3);
+
+            return response()->json([
+                'weakestTopics' => $weakestTopics
+            ]);
+        } else {
+            return response()->json([
+                'weakestTopics' => []
+            ]);
+        }
     }
 
     public function Strength()
     {
-        return response()->json([
-            'strongestTopics' => [
-                [
-                    'topic' => 'Strong Topic #1',
-                    'percentage' => 74,
-                ],
-                [
-                    'topic' => 'Strong Topic #2',
-                    'percentage' => 74,
-                ],
-                [
-                    'topic' => 'Strong Topic #3',
-                    'percentage' => 74,
-                ],
-            ],
-        ]);
+        $firstClass = $this->FirstClass()->getData();
+        if ($firstClass) {
+            $classId = $firstClass->id;
+
+            $levels = Levels::where('class_id', $classId)->with('results')->get();
+
+            $strongestTopics = $levels->map(function ($level) {
+                $totalErrors = $level->results->reduce(function ($carry, $result) {
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+                    $errors = $scoreAvailable - $scoreObtained;
+                    return $carry + $errors;
+                }, 0);
+
+                return [
+                    'topic' => $level->level_name,
+                    'percentage' => $totalErrors,
+                ];
+            })->sortByDesc('percentage')->values()->take(3);
+
+            return response()->json([
+                'strongestTopics' => $strongestTopics
+            ]);
+        } else {
+            return response()->json([
+                'strongestTopics' => []
+            ]);
+        }
     }
 
     function Activity()
