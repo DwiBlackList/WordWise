@@ -92,7 +92,7 @@ class UsersController extends Controller
     public function update(Request $request, string $id)
     {
         $data = User::find($id);
-        $data->update($request->all());
+        $data->update([$request->all() , 'password' => Hash::make($request->input('password'))]);
         return response()->json([
             'message' => 'Data berhasil diupdate'
         ], 200);
