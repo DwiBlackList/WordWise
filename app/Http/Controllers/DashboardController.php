@@ -180,23 +180,23 @@ class DashboardController extends Controller
         $firstClass = $this->FirstClass()->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
-    
+
             $levels = Levels::where('class_id', $classId)->with('results')->get();
-    
+
             $weakestTopics = $levels->map(function ($level) {
                 $totalErrors = $level->results->reduce(function ($carry, $result) {
-                    $scoreArray = json_decode($result->score, true);
-                    if (is_array($scoreArray)) {
-                        return $carry + count($scoreArray);
-                    }
-                    return $carry;
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+                    $errors = $scoreAvailable - $scoreObtained;
+                    return $carry + $errors;
                 }, 0);
-    
+
                 return [
                     'topic' => $level->level_name,
                     'percentage' => $totalErrors,
                 ];
-            })->sortByDesc('percentage')->values()->take(3);
+            })->sortBy('percentage')->values()->take(3);
 
             return response()->json([
                 'weakestTopics' => $weakestTopics
@@ -207,30 +207,30 @@ class DashboardController extends Controller
             ]);
         }
     }
-    
+
     public function Strength()
     {
         $firstClass = $this->FirstClass()->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
-    
+
             $levels = Levels::where('class_id', $classId)->with('results')->get();
-    
+
             $strongestTopics = $levels->map(function ($level) {
-                $totalCorrect = $level->results->reduce(function ($carry, $result) {
-                    $scoreArray = json_decode($result->score, true);
-                    if (is_array($scoreArray)) {
-                        return $carry + count($scoreArray);
-                    }
-                    return $carry;
+                $totalErrors = $level->results->reduce(function ($carry, $result) {
+                    $scoreParts = explode('/', $result->score);
+                    $scoreObtained = isset($scoreParts[0]) ? (int)$scoreParts[0] : 0;
+                    $scoreAvailable = isset($scoreParts[1]) ? (int)$scoreParts[1] : 0;
+                    $errors = $scoreAvailable - $scoreObtained;
+                    return $carry + $errors;
                 }, 0);
-    
+
                 return [
                     'topic' => $level->level_name,
-                    'percentage' => $totalCorrect,
+                    'percentage' => $totalErrors,
                 ];
             })->sortByDesc('percentage')->values()->take(3);
-    
+
             return response()->json([
                 'strongestTopics' => $strongestTopics
             ]);
