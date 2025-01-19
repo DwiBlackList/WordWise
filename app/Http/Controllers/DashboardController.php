@@ -29,8 +29,8 @@ class DashboardController extends Controller
         // });
         // dd($levels);
         $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
-        $weakestTopics = app(DashboardController::class)->Weakness()->getData();
-        $strongestTopics = app(DashboardController::class)->Strength()->getData();
+        $weakestTopics = $this->Weakness()->getData();
+        $strongestTopics = $this->Strength()->getData();
         $leaders = app(DashboardController::class)->Leadboard()->getData();
         $activity = app(DashboardController::class)->ActivityLama()->getData();
 
@@ -151,42 +151,68 @@ class DashboardController extends Controller
 
     public function Weakness()
     {
-        return response()->json([
-            'weakestTopics' => [
-                [
-                    'topic' => 'Error Topic #1',
-                    'percentage' => 74,
-                ],
-                [
-                    'topic' => 'Error Topic #2',
-                    'percentage' => 50,
-                ],
-                [
-                    'topic' => 'Error Topic #3',
-                    'percentage' => 74,
-                ],
-            ],
-        ]);
-    }
+        $firstClass = $this->FirstClass()->getData();
+        if ($firstClass) {
+            $classId = $firstClass->id;
+    
+            $levels = Levels::where('class_id', $classId)->with('results')->get();
+    
+            $weakestTopics = $levels->map(function ($level) {
+                $totalErrors = $level->results->reduce(function ($carry, $result) {
+                    $scoreArray = json_decode($result->score, true);
+                    if (is_array($scoreArray)) {
+                        return $carry + count($scoreArray);
+                    }
+                    return $carry;
+                }, 0);
+    
+                return [
+                    'topic' => $level->level_name,
+                    'percentage' => $totalErrors,
+                ];
+            })->sortByDesc('percentage')->values()->take(3);
 
+            return response()->json([
+                'weakestTopics' => $weakestTopics
+            ]);
+        } else {
+            return response()->json([
+                'weakestTopics' => []
+            ]);
+        }
+    }
+    
     public function Strength()
     {
-        return response()->json([
-            'strongestTopics' => [
-                [
-                    'topic' => 'Strong Topic #1',
-                    'percentage' => 74,
-                ],
-                [
-                    'topic' => 'Strong Topic #2',
-                    'percentage' => 74,
-                ],
-                [
-                    'topic' => 'Strong Topic #3',
-                    'percentage' => 74,
-                ],
-            ],
-        ]);
+        $firstClass = $this->FirstClass()->getData();
+        if ($firstClass) {
+            $classId = $firstClass->id;
+    
+            $levels = Levels::where('class_id', $classId)->with('results')->get();
+    
+            $strongestTopics = $levels->map(function ($level) {
+                $totalCorrect = $level->results->reduce(function ($carry, $result) {
+                    $scoreArray = json_decode($result->score, true);
+                    if (is_array($scoreArray)) {
+                        return $carry + count($scoreArray);
+                    }
+                    return $carry;
+                }, 0);
+    
+                return [
+                    'topic' => $level->level_name,
+                    'percentage' => $totalCorrect,
+                ];
+            })->sortByDesc('percentage')->values()->take(3);
+    
+            return response()->json([
+                'strongestTopics' => $strongestTopics
+            ]);
+        } else {
+            return response()->json([
+                'strongestTopics' => []
+            ]);
+        }
     }
 
     function Activity()

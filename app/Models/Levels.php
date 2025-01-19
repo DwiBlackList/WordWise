@@ -23,6 +23,6 @@ class Levels extends Model
 
     public function results()
     {
-        return $this->hasMany(Results::class);
+        return $this->hasMany(Results::class , 'level_id');
     }
 }
