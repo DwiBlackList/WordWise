@@ -7,6 +7,7 @@ use App\Models\Levels;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Results;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -32,7 +33,6 @@ class DashboardController extends Controller
         $strongestTopics = app(DashboardController::class)->Strength()->getData();
         $leaders = app(DashboardController::class)->Leadboard()->getData();
         $activity = app(DashboardController::class)->ActivityLama()->getData();
-        $currentKnowledge = app(DashboardController::class)->CurrentKnowledge()->getData();
 
         // List Kelas Untuk menampilkan seluruh kelas yang ada pada user tersebut , digunakan untuk ngelink dropdown
         $ListClass = $this->ListClass();
@@ -68,6 +68,40 @@ class DashboardController extends Controller
         // dd($FirstClass);
         return response()->json($FirstClass);
     }
+
+    public function Leadboarda()
+    {
+        $firstClass = $this->FirstClass()->getData();
+        if ($firstClass) {
+            $classId = $firstClass->id;
+
+            $users = User::whereHas('joinedclass', function ($query) use ($classId) {
+                $query->where('class_id', $classId);
+            })->with(['results' => function ($query) {
+                $query->with('level');
+            }])->get();
+
+            $leaders = $users->map(function ($user) {
+                $totalScoreCount = $user->results->reduce(function ($carry, $result) {
+                    return $carry + count(json_decode($result->score, true));
+                }, 0);
+
+                return [
+                    'name' => $user->name,
+                    'rank' => $totalScoreCount,
+                ];
+            })->sortBy('rank')->values()->take(5);
+            dd($leaders);
+            return response()->json([
+                'leaders' => $leaders
+            ]);
+        } else {
+            return response()->json([
+                'leaders' => []
+            ]);
+        }
+    }
+
     public function Leadboard()
     {
         return response()->json([
@@ -81,6 +115,7 @@ class DashboardController extends Controller
             ],
         ]);
     }
+
     public function Weakness()
     {
         return response()->json([
@@ -121,7 +156,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    function Activity() {
+    function Activity()
+    {
         $firstClass = $this->FirstClass()->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
@@ -143,7 +179,7 @@ class DashboardController extends Controller
             return response()->json([
                 'activity' => $activity
             ]);
-        }else {
+        } else {
             return response()->json([
                 'activity' => []
             ]);
@@ -170,24 +206,5 @@ class DashboardController extends Controller
                 ],
             ],
         );
-    }
-
-    public function CurrentKnowledge()
-    {
-        return response()->json([
-            'labels' => [
-                "12-01-2023",
-                "01-01-2024",
-                "02-01-2024",
-                "03-01-2024",
-                "04-01-2024",
-                "05-01-2024",
-                "06-01-2024",
-                "07-01-2024",
-                "08-01-2024",
-                "09-01-2024",
-            ],
-            'value' => [732, 610, 610, 504, 504, 504, 349, 349, 504, 342],
-        ]);
     }
 }
