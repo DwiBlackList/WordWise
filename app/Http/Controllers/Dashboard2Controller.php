@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Results;
 use App\Models\User;
 
-class DashboardController extends Controller
+class Dashboard2Controller extends Controller
 {
     // konstruktor accessable with login user only
     public function __construct()
@@ -17,18 +17,18 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id)
     {
         $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
-        $weakestTopics = $this->Weakness()->getData();
-        $strongestTopics = $this->Strength()->getData();
+        $weakestTopics = $this->Weakness($id)->getData();
+        $strongestTopics = $this->Strength($id)->getData();
         // $leaders = $this->Leadboard()->getData();
-        $activity = $this->Activity()->getData();
-        $currentKnowledge = $this->Activity()->getData();
-        $ListClass = $this->ListClass();
-        $FirstClass = $this->FirstClass()->getData();
-        $topFirst5 = $this->Top5()->getData();
-        $topLast5 = $this->Top5FromBack()->getData();
+        $activity = $this->Activity($id)->getData();
+        $currentKnowledge = $this->Activity($id)->getData();
+        $ListClass = $this->ListClass($id);
+        $FirstClass = $this->FirstClass($id)->getData();
+        $topFirst5 = $this->Top5($id)->getData();
+        $topLast5 = $this->Top5FromBack($id)->getData();
 
         return view('dashboard', [
             'ssrData' => json_encode([
@@ -55,17 +55,15 @@ class DashboardController extends Controller
         return response()->json($classes);
     }
 
-    public function FirstClass()
+    public function FirstClass($id)
     {
-        $ListClass = $this->ListClass()->getData();
-        $FirstClass = $ListClass[0] ?? [];
-        // dd($FirstClass);
+        $FirstClass = Classes::where('id', $id)->first();
         return response()->json($FirstClass);
     }
 
-    public function Top5()
+    public function Top5($id)
     {
-        $firstClass = $this->FirstClass()->getData();
+        $firstClass = $this->FirstClass($id)->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
 
@@ -109,9 +107,9 @@ class DashboardController extends Controller
         }
     }
 
-    public function Top5FromBack()
+    public function Top5FromBack($id)
     {
-        $firstClass = $this->FirstClass()->getData();
+        $firstClass = $this->FirstClass($id)->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
 
@@ -155,9 +153,9 @@ class DashboardController extends Controller
         }
     }
 
-    public function Weakness()
+    public function Weakness($id)
     {
-        $firstClass = $this->FirstClass()->getData();
+        $firstClass = $this->FirstClass($id)->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
 
@@ -188,9 +186,9 @@ class DashboardController extends Controller
         }
     }
 
-    public function Strength()
+    public function Strength($id)
     {
-        $firstClass = $this->FirstClass()->getData();
+        $firstClass = $this->FirstClass($id)->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
 
@@ -221,9 +219,9 @@ class DashboardController extends Controller
         }
     }
 
-    function Activity()
+    function Activity($id)
     {
-        $firstClass = $this->FirstClass()->getData();
+        $firstClass = $this->FirstClass($id)->getData();
         if ($firstClass) {
             $classId = $firstClass->id;
 

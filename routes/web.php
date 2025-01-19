@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dashboard2Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\LevelsController;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'LandingPage']);
 
 Route::get('/home', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/home/{id}', [Dashboard2Controller::class, 'index'])->middleware(['auth', 'verified']);
 
 // Route::get('/table', [ClassesController::class, 'index'])->middleware(['auth', 'verified'])->name('table'); sudah ada di Route::resource('classes', ClassesController::class);
 
