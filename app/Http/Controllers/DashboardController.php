@@ -31,11 +31,12 @@ class DashboardController extends Controller
         $weakestTopics = app(DashboardController::class)->Weakness()->getData();
         $strongestTopics = app(DashboardController::class)->Strength()->getData();
         $leaders = app(DashboardController::class)->Leadboard()->getData();
-        $activity = app(DashboardController::class)->Activity()->getData();
+        $activity = app(DashboardController::class)->ActivityLama()->getData();
         $currentKnowledge = app(DashboardController::class)->CurrentKnowledge()->getData();
 
         // List Kelas Untuk menampilkan seluruh kelas yang ada pada user tersebut , digunakan untuk ngelink dropdown
-        $ListClass = $this->ListClass();     
+        $ListClass = $this->ListClass();
+        $FirstClass = $this->FirstClass()->getData();
 
         return view('dashboard', [
             'ssrData' => json_encode([
@@ -59,13 +60,16 @@ class DashboardController extends Controller
         $classes = Classes::where('user_id', $userId)->get();
         return response()->json($classes);
     }
-    public function Leadboard(){
-        // $levels = Levels::where('class_id', $id)->get();
-        // $results = Results::where('level_id', 2)->get();
-        // $result = $results->sortByDesc(function($result) {
-        //     return (int) explode('/', $result->score)[0];
-        // });
-        // dd($result);
+
+    public function FirstClass()
+    {
+        $ListClass = $this->ListClass()->getData();
+        $FirstClass = $ListClass[0] ?? [];
+        // dd($FirstClass);
+        return response()->json($FirstClass);
+    }
+    public function Leadboard()
+    {
         return response()->json([
             'leaders' => [
                 ['name' => 'Name 1', 'rank' => 1],
@@ -77,7 +81,8 @@ class DashboardController extends Controller
             ],
         ]);
     }
-    public function Weakness(){
+    public function Weakness()
+    {
         return response()->json([
             'weakestTopics' => [
                 [
@@ -96,7 +101,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function Strength(){
+    public function Strength()
+    {
         return response()->json([
             'strongestTopics' => [
                 [
@@ -115,39 +121,73 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function Activity(){
-        return response()->json([
-            'activity' => [
-                110, 120, 100, 250, 280, 300, 200, 230, 230, 350, 380, 400
+    function Activity() {
+        $firstClass = $this->FirstClass()->getData();
+        if ($firstClass) {
+            $classId = $firstClass->id;
+
+            $results = Results::whereHas('level', function ($query) use ($classId) {
+                $query->where('class_id', $classId);
+            })->get();
+
+            $activity = $results->groupBy(function ($result) {
+                return \Carbon\Carbon::parse($result->created_at)->format('m-Y');
+            })->map(function ($group) {
+                return $group->count();
+            })->sortKeysUsing(function ($a, $b) {
+                return \Carbon\Carbon::createFromFormat('m-Y', $a)->timestamp - \Carbon\Carbon::createFromFormat('m-Y', $b)->timestamp;
+            });
+
+            dd($activity);
+
+            return response()->json([
+                'activity' => $activity
+            ]);
+        }else {
+            return response()->json([
+                'activity' => []
+            ]);
+        }
+    }
+
+    public function ActivityLama()
+    {
+        return response()->json(
+            [
+                'activity' => [
+                    110,
+                    120,
+                    100,
+                    250,
+                    280,
+                    300,
+                    200,
+                    230,
+                    230,
+                    350,
+                    380,
+                    400
+                ],
             ],
-        ],
-    );
+        );
     }
 
-    public function CurrentKnowledge(){
+    public function CurrentKnowledge()
+    {
         return response()->json([
-            'labels' => [  "12-01-2023",
-            "01-01-2024",
-            "02-01-2024",
-            "03-01-2024",
-            "04-01-2024",
-            "05-01-2024",
-            "06-01-2024",
-            "07-01-2024",
-            "08-01-2024",
-            "09-01-2024",
-        ],
-        'value' => [  732, 610, 610, 504, 504, 504, 349, 349, 504, 342],
-    ]);
-    }
-
-    public function LevelProgress(){
-        return response()->json([
-            'level' => "Level Complete",
-            'progress' => "Greate Progress",
-            'current' => 3,
-            'total' => 5,
+            'labels' => [
+                "12-01-2023",
+                "01-01-2024",
+                "02-01-2024",
+                "03-01-2024",
+                "04-01-2024",
+                "05-01-2024",
+                "06-01-2024",
+                "07-01-2024",
+                "08-01-2024",
+                "09-01-2024",
+            ],
+            'value' => [732, 610, 610, 504, 504, 504, 349, 349, 504, 342],
         ]);
     }
-
 }
