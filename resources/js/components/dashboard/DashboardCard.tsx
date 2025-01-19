@@ -1,16 +1,15 @@
-import LineChart from "../dashboard/charts/LineChart";
-import { chartAreaGradient } from "../dashboard/charts/ChartConfig";
 import React from "react";
-// Import utilities
+import LineChart from "./charts/LineChart";
+import { chartAreaGradient } from "./charts/ChartConfig";
 import { tailwindConfig, hexToRGB } from "../../utils/utils";
 
 function DashboardCard({ data }) {
+    console.log(data);
     const chartData = {
-        labels: data.labels,
+        labels: Object.keys(data.activity),
         datasets: [
-            // Indigo line
             {
-                data: data.value,
+                data: Object.values(data.activity),
                 fill: true,
                 backgroundColor: function (context: any) {
                     const chart = context.chart;
@@ -40,7 +39,7 @@ function DashboardCard({ data }) {
                 pointBorderWidth: 0,
                 pointHoverBorderWidth: 0,
                 clip: 20,
-                tension: 0.5,
+                tension: 0,
             },
         ],
     };
@@ -50,17 +49,17 @@ function DashboardCard({ data }) {
             <div className="px-5 pt-5">
                 <header className="flex justify-between items-start">
                     <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-2">
-                        Current Knowledge
+                        Activity
                     </h2>
                 </header>
                 <div className="flex items-start">
-                    <div className="text-xl font-bold text-gray-800 dark:text-gray-100 mr-2">
+                    {/* <div className="text-xl font-bold text-gray-800 dark:text-gray-100 mr-2">
                         86%
-                    </div>
+                    </div> */}
                 </div>
             </div>
-            <div className="grow max-sm:max-h-[128px] xl:max-h-[128px]">
-                <LineChart data={chartData} width={100} height={100} />
+            <div className="grow h-full pb-4">
+                <LineChart data={chartData} />
             </div>
         </div>
     );
