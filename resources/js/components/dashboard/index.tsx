@@ -3,9 +3,8 @@ import Card from "../dashboard/Card";
 import TopicsList from "../dashboard/topicList";
 import Leaderboard from "../dashboard/Leadboard";
 import DashboardCard from "../dashboard/DashboardCard";
-import SpentThisYearChart from "./yearStatisticCard.tsx";
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid2";
 
 const App = ({ data }) => {
