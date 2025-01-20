@@ -19,15 +19,19 @@ export default {
         extend: {
             keyframes: {
                 "infinite-scroll": {
-                    "0%": { transform: "translateX(0)" },
-                    "100%": {
-                        transform: "translateX(calc(-100% / var(--count)))",
-                    },
-                },
-            },
-            animation: {
-                "infinite-scroll": "infinite-scroll 10s linear infinite",
-            },
+                  "0%": { transform: "translateX(0)" },
+                  "100%": { transform: "translateX(calc(-50% - 1rem))" },
+                }
+                ,
+                "infinite-scroll-partner": {
+                  "0%": { transform: "translateX(0)" },
+                  "100%": { transform: "translateX(calc(-50% - 1rem))" }
+                }
+              },
+              animation: {
+                "infinite-scroll": "infinite-scroll 40s linear infinite",
+                "infinite-scroll-partner": "infinite-scroll-partner 25s linear infinite",
+              },
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
