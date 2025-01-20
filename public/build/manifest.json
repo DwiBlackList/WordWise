@@ -1,0 +1,167 @@
+{
+  "_Sidebar-Kaq3-wnM.js": {
+    "file": "assets/Sidebar-Kaq3-wnM.js",
+    "name": "Sidebar",
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js",
+      "_axios-Cl7A0Ixg.js"
+    ]
+  },
+  "__commonjsHelpers-DWwsNxpa.js": {
+    "file": "assets/_commonjsHelpers-DWwsNxpa.js",
+    "name": "_commonjsHelpers"
+  },
+  "_axios-Cl7A0Ixg.js": {
+    "file": "assets/axios-Cl7A0Ixg.js",
+    "name": "axios"
+  },
+  "_button-Bd7MdRjr.js": {
+    "file": "assets/button-Bd7MdRjr.js",
+    "name": "button",
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js"
+    ]
+  },
+  "_chunk-K6AXKMTT-CTFu9QFo.js": {
+    "file": "assets/chunk-K6AXKMTT-CTFu9QFo.js",
+    "name": "chunk-K6AXKMTT",
+    "imports": [
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
+  },
+  "_index-BWM9Cntx.js": {
+    "file": "assets/index-BWM9Cntx.js",
+    "name": "index",
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js"
+    ]
+  },
+  "_jsplumb-CVW381dp.js": {
+    "file": "assets/jsplumb-CVW381dp.js",
+    "name": "jsplumb"
+  },
+  "public/fonts/Pixellari.ttf": {
+    "file": "assets/Pixellari-_aGpr8fu.ttf",
+    "src": "public/fonts/Pixellari.ttf"
+  },
+  "public/fonts/Pixellari.woff": {
+    "file": "assets/Pixellari-4DDv3VNl.woff",
+    "src": "public/fonts/Pixellari.woff"
+  },
+  "public/fonts/Pixellari.woff2": {
+    "file": "assets/Pixellari-DaSZXlxA.woff2",
+    "src": "public/fonts/Pixellari.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-B_XkBYBp.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/editor.css": {
+    "file": "assets/editor-CCkpTO52.css",
+    "src": "resources/css/editor.css",
+    "isEntry": true
+  },
+  "resources/js/Dashboard.tsx": {
+    "file": "assets/Dashboard-BnrsLgNu.js",
+    "name": "Dashboard",
+    "src": "resources/js/Dashboard.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js",
+      "_Sidebar-Kaq3-wnM.js",
+      "__commonjsHelpers-DWwsNxpa.js",
+      "_axios-Cl7A0Ixg.js"
+    ]
+  },
+  "resources/js/LDE/Main.js": {
+    "file": "assets/Main-d2nvwdub.js",
+    "name": "Main",
+    "src": "resources/js/LDE/Main.js",
+    "isEntry": true,
+    "imports": [
+      "_jsplumb-CVW381dp.js"
+    ]
+  },
+  "resources/js/LandingPage.tsx": {
+    "file": "assets/LandingPage-CmCOboDk.js",
+    "name": "LandingPage",
+    "src": "resources/js/LandingPage.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js",
+      "_button-Bd7MdRjr.js",
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
+  },
+  "resources/js/LevelCRUD.tsx": {
+    "file": "assets/LevelCRUD-Ch5iFbHw.js",
+    "name": "LevelCRUD",
+    "src": "resources/js/LevelCRUD.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js",
+      "_Sidebar-Kaq3-wnM.js",
+      "_index-BWM9Cntx.js",
+      "_axios-Cl7A0Ixg.js",
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
+  },
+  "resources/js/Login.tsx": {
+    "file": "assets/Login-DwcCBcFl.js",
+    "name": "Login",
+    "src": "resources/js/Login.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js",
+      "_button-Bd7MdRjr.js",
+      "_axios-Cl7A0Ixg.js",
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
+  },
+  "resources/js/Table.tsx": {
+    "file": "assets/Table-BUxk815X.js",
+    "name": "Table",
+    "src": "resources/js/Table.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js",
+      "_Sidebar-Kaq3-wnM.js",
+      "_index-BWM9Cntx.js",
+      "_axios-Cl7A0Ixg.js",
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
+  },
+  "resources/js/UsersCRUD.tsx": {
+    "file": "assets/UsersCRUD-QavLQein.js",
+    "name": "UsersCRUD",
+    "src": "resources/js/UsersCRUD.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-K6AXKMTT-CTFu9QFo.js",
+      "_Sidebar-Kaq3-wnM.js",
+      "_index-BWM9Cntx.js",
+      "_axios-Cl7A0Ixg.js",
+      "__commonjsHelpers-DWwsNxpa.js"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-B0hgNZkx.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "__commonjsHelpers-DWwsNxpa.js",
+      "_axios-Cl7A0Ixg.js"
+    ]
+  },
+  "resources/ts/App.ts": {
+    "file": "assets/App-Da4wXX98.js",
+    "name": "App",
+    "src": "resources/ts/App.ts",
+    "isEntry": true,
+    "imports": [
+      "_jsplumb-CVW381dp.js"
+    ]
+  }
+}
