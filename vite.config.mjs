@@ -23,7 +23,7 @@ export default defineConfig({
                 "resources/js/app.js",
                 "resources/css/editor.css",
                 "resources/js/LDE/Main.js",
-                "resources/js/landingPage.tsx",
+                "resources/js/LandingPage.tsx",
                 "resources/js/Dashboard.tsx",
                 "resources/js/LevelCRUD.tsx",
                 "resources/js/Login.tsx",
