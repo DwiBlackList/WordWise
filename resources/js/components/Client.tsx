@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import React from "react";
-
 const schoolLogos = [
     "/SMK Telkom Bandung.png",
     "/SD Telkom Makassar.png",
@@ -20,6 +19,10 @@ const schoolLogos = [
 
 const partnerLogos = [
     "/Bandung Techno Park.png",
+    "/indigoHub.png",
+    "/LogoLAC.webp",
+    "/ESStavfit.png",
+    "/Bandung_Techno_Park.png",
     "/indigoHub.png",
     "/LogoLAC.webp",
     "/ESStavfit.png",
@@ -162,7 +165,7 @@ export const Client = () => {
                         </motion.h1>
                         <div className="flex w-full overflow-hidden">
                             <div
-                                className="flex animate-infinite-scroll gap-4 py-4 shrink-0"
+                                className="flex animate-infinite-scroll-partner gap-4 py-4 shrink-0"
                                 style={
                                     {
                                         "--count": partnerLogos.length,

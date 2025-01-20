@@ -1,6 +1,5 @@
 import Background from "../components/Background";
 import LoginForm from "../components/LoginForm";
-import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import React from "react";
 
@@ -19,7 +18,7 @@ const Login = () => {
                         <span className="font-semibold">Back</span>
                     </a>
                 </div>
-                <div className="flex flex-col items-center space-y-4 sm:space-y-6">
+                <div className="flex flex-col items-center space-y-4">
                     <img
                         src="logo.svg"
                         alt="logo"
@@ -28,19 +27,12 @@ const Login = () => {
                     <h2 className="text-xl sm:text-2xl font-semibold text-slate-700">
                         Welcome back!
                     </h2>
+                    <h4 className="text-sm text-slate-500 font-semibold">
+                        Login For Teacher
+                    </h4>
                 </div>
 
                 <LoginForm />
-
-                <div className="text-center text-sm text-slate-600">
-                    Not a member?{" "}
-                    <Link
-                        to="/"
-                        className="text-orange-400 hover:text-orange-500 font-semibold"
-                    >
-                        Register now
-                    </Link>
-                </div>
             </div>
         </div>
     );

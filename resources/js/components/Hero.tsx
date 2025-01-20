@@ -35,7 +35,7 @@ export const Hero = () => {
             </div>
 
             {/* Content Layer */}
-            <div className="relative z-10 flex flex-col items-center justify-center text-center py-6 sm:py-10 md:py-16 space-y-4 sm:space-y-6 md:space-y-8">
+            <div className="relative z-10 flex flex-col items-center justify-center text-center py-10 md:py-16 space-y-4 sm:space-y-6 md:space-y-8">
                 <div className="relative">
                     <img
                         src="./videoscreen.svg"
@@ -65,7 +65,7 @@ export const Hero = () => {
                     <br />
                     <a
                         className="relative inline-block border-none bg-none p-0 cursor-pointer h-12 sm:h-14"
-                        href="#client"
+                        href="#contact"
                     >
                         <img
                             src="buttonBg.svg"
