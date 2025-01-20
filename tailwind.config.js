@@ -1,5 +1,7 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
+import tailwindcssAnimate from "tailwindcss-animate";
+import flowbitePlugin from "flowbite/plugin";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -211,9 +213,5 @@ export default {
         },
     },
 
-    plugins: [
-        forms,
-        require("tailwindcss-animate"),
-        require("flowbite/plugin"),
-    ],
+    plugins: [forms, tailwindcssAnimate, flowbitePlugin],
 };
