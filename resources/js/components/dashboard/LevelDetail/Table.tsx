@@ -66,7 +66,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
                 <tbody>
                     <tr
                         key={data.level.id}
-                        className="bg-white cursor-pointer hover:bg-gray-100"
+                        className="bg-white hover:bg-gray-100"
                         onClick={() => handleRowClick(data.level.id)}
                     >
                         <td className="px-2 sm:px-4 py-2">
