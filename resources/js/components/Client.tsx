@@ -18,7 +18,7 @@ const schoolLogos = [
 ];
 
 const partnerLogos = [
-    "/Bandung Techno Park.png",
+    "/Bandung_Techno_Park.png",
     "/indigoHub.png",
     "/LogoLAC.webp",
     "/ESStavfit.png",
