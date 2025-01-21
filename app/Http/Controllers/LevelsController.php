@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Classes;
 use App\Models\Levels;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LevelsController extends Controller
@@ -56,7 +57,22 @@ class LevelsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $level = Levels::findOrFail($id);
+
+        // Get the class ID from the level
+        $classId = $level->class_id;
+
+        // Get users who have joined the class
+        $users = User::whereHas('joinedclass', function ($query) use ($classId) {
+            $query->where('class_id', $classId);
+        })->with(['results' => function ($query) use ($id) {
+            $query->where('level_id', $id);
+        }])->get();
+
+        return response()->json([
+            'level' => $level,
+            'users' => $users
+        ], 201);
     }
 
     /**
