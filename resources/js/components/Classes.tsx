@@ -6,42 +6,42 @@ const categories = [
         number: "01",
         category: "Simulate Communication With Native Speaker",
         description:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+            "Practice real conversations using speech recognition technology to improve fluency and pronunciation, just like interacting with native speakers.",
         color: "text-green-500",
     },
     {
         number: "02",
         category: "Interactive Gamification",
         description:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+            "Master the language through 2.5D pixel art visuals by presenting materials in the form of fun games and challenges designed to make language learning fun and effective.",
         color: "text-pink-500",
     },
     {
         number: "03",
         category: "On The Go Learning",
         description:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+            "Access learning materials anytime, anywhere, making it easy to fit language practice into your daily routine.",
         color: "text-red-400",
     },
     {
         number: "04",
         category: "Content Managing System",
         description:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+            "Create a personalized learning experience by managing, customizing, and uploading curriculum-aligned content.",
         color: "text-purple-500",
     },
     {
         number: "05",
         category: "Grammar and Pronunciation Checker",
         description:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+            "Get instant grammar and pronunciation feedback to improve accuracy and confidence.",
         color: "text-amber-500",
     },
     {
         number: "06",
         category: "Progress Monitoring",
         description:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+            "Track your learning progress with detailed reports and analytics to keep you motivated and on track.",
         color: "text-blue-500",
     },
 ];

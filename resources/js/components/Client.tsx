@@ -23,6 +23,10 @@ const partnerLogos = [
     "/indigoHub.png",
     "/LogoLAC.webp",
     "/ESStavfit.png",
+    "/Bandung_Techno_Park.png",
+    "/indigoHub.png",
+    "/LogoLAC.webp",
+    "/ESStavfit.png",
 ];
 
 const Logo = ({ src, alt }: { src: string; alt: string }) => (
