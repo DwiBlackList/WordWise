@@ -39,7 +39,7 @@ const Page: React.FC<PageProps> = ({ data }) => {
     };
     return (
         <div className="flex flex-col h-screen overflow-y-auto bg-gray-100 p-4">
-            <ReportsComponent name={data.classData.class_name} />
+            <ReportsComponent name={data.level.level_name} />
             <Box sx={{ flexGrow: 1 }}>
                 {/* <Grid container spacing={2}>
                     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
@@ -67,33 +67,13 @@ const Page: React.FC<PageProps> = ({ data }) => {
                         />
                     </Grid>
                 </Grid> */}
-                <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    mt={2}
-                >
-                    <div className="flex justify-center items-center w-full">
-                        <a
-                            href={`/editor/${data.classData.id}`}
-                            className="bg-white w-full text-blue-500 border rounded-full px-4 py-2 hover:bg-blue-50 transition duration-200 focus:outline-none text-center"
-                        >
-                            Add Data +
-                        </a>
-                        <Modal
-                            isOpen={isModalOpen}
-                            onClose={handleCloseModal}
-                            onConfirm={handleConfirm}
-                        />
-                    </div>
-                </Grid>
                 <Grid container mt={2}>
                     <Grid size={{ xs: 12 }}>
                         <div className="p-4 bg-white rounded-xl mb-6">
                             <TableComponent data={data} />
                         </div>
                         <div className="p-4 bg-white rounded-xl">
-                            <TableStudents data={data} />
+                            <TableStudents data={data.student} />
                         </div>
                     </Grid>
                 </Grid>

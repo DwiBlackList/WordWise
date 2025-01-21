@@ -2,7 +2,10 @@ import { motion } from "framer-motion";
 import React from "react";
 const Contacts = () => {
     return (
-        <div className="flex flex-col md:flex-row px-4 md:px-16 py-16 w-full md:justify-evenly items-center gap-8 md:gap-0">
+        <div
+            id="contact"
+            className="flex flex-col md:flex-row px-4 md:px-16 py-16 w-full md:justify-evenly items-center gap-8 md:gap-0"
+        >
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -36,7 +39,8 @@ const Contacts = () => {
                     <motion.a
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        href=""
+                        href="https://play.google.com/store/apps/details?id=com.LunarInteractive.Wordwisepocket"
+                        target="_blank"
                         className="cursor-pointer w-auto"
                     >
                         <img

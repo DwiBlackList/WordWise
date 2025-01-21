@@ -13,6 +13,7 @@ interface TopicsListProps {
 }
 
 const TopicsList: React.FC<TopicsListProps> = ({ title, topics }) => {
+    console.log(topics);
     return (
         <div className="bg-white p-4 shadow rounded-2xl h-full">
             <h2 className="text-gray-500">{title}</h2>

@@ -8,6 +8,7 @@ import React from "react";
 import Grid from "@mui/material/Grid2";
 
 const App = ({ data }) => {
+    console.log(data);
     return (
         <div className="flex flex-col w-full h-screen overflow-y-auto bg-gray-100 p-4">
             <Header data={data.listClass} />

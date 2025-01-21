@@ -1,12 +1,11 @@
-import Table from "../components/dashboard/LevelCRUD";
+import Table from "../components/dashboard/LevelDetail";
 import { Sidebar } from "../components/dashboard/Sidebar";
 import React, { useEffect, useState } from "react";
 const TableCRUD = ({ ssrData }) => {
     const [data, setData] = useState({
-        classData: ssrData.class,
-        levelData: ssrData.levels,
         dataUserLogin: ssrData.dataUserLogin,
-        studentData: ssrData.students,
+        level: ssrData.level,
+        student: ssrData.users,
     });
 
     // useEffect(() => {
