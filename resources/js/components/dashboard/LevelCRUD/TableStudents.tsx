@@ -52,10 +52,7 @@ const TableStudents: React.FC<TableProps> = ({ data }) => {
                 </thead>
                 <tbody>
                     {data?.studentData?.map((row, index) => (
-                        <tr
-                            key={index}
-                            className="bg-white cursor-pointer hover:bg-gray-100"
-                        >
+                        <tr key={index} className="bg-white hover:bg-gray-100">
                             <td className="px-2 sm:px-4 py-2">{row.name}</td>
                         </tr>
                     ))}
