@@ -89,6 +89,10 @@ class ClassesController extends Controller
 
         $class = Classes::findOrFail($id);
         $levels = Levels::where('class_id', $id)->get();
+        $userjoined = User::whereHas('joinedclass', function ($query) use ($id) {
+            $query->where('class_id', $id);
+        })->get();
+        // dd($userjoined);
 
         $combinedData = [
             'class' => $class,
