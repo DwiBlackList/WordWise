@@ -1,5 +1,5 @@
-import { c as createLucideIcon, R as React, r as reactExports, L as Link, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-CTFu9QFo.js";
-import { c as cn, B as Button, A as ArrowLeft } from "./button-Bd7MdRjr.js";
+import { c as createLucideIcon, R as React, r as reactExports, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-llj0GQDa.js";
+import { c as cn, B as Button, A as ArrowLeft } from "./button-DUIenwLR.js";
 import { a as axios } from "./axios-Cl7A0Ixg.js";
 import "./_commonjsHelpers-DWwsNxpa.js";
 /**
@@ -134,21 +134,14 @@ const Login = () => {
     },
     /* @__PURE__ */ React.createElement(ArrowLeft, { className: "h-5 w-5" }),
     /* @__PURE__ */ React.createElement("span", { className: "font-semibold" }, "Back")
-  )), /* @__PURE__ */ React.createElement("div", { className: "flex flex-col items-center space-y-4 sm:space-y-6" }, /* @__PURE__ */ React.createElement(
+  )), /* @__PURE__ */ React.createElement("div", { className: "flex flex-col items-center space-y-4" }, /* @__PURE__ */ React.createElement(
     "img",
     {
       src: "logo.svg",
       alt: "logo",
       className: "h-8 sm:h-10 md:h-12"
     }
-  ), /* @__PURE__ */ React.createElement("h2", { className: "text-xl sm:text-2xl font-semibold text-slate-700" }, "Welcome back!")), /* @__PURE__ */ React.createElement(LoginForm, null), /* @__PURE__ */ React.createElement("div", { className: "text-center text-sm text-slate-600" }, "Not a member?", " ", /* @__PURE__ */ React.createElement(
-    Link,
-    {
-      to: "/",
-      className: "text-orange-400 hover:text-orange-500 font-semibold"
-    },
-    "Register now"
-  ))));
+  ), /* @__PURE__ */ React.createElement("h2", { className: "text-xl sm:text-2xl font-semibold text-slate-700" }, "Welcome back!"), /* @__PURE__ */ React.createElement("h4", { className: "text-sm text-slate-500 font-semibold" }, "Login For Teacher")), /* @__PURE__ */ React.createElement(LoginForm, null)));
 };
 if (document.getElementById("app")) {
   ReactDOM.createRoot(document.getElementById("app")).render(

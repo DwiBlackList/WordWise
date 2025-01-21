@@ -1,7 +1,7 @@
 var _a;
-import { r as reactExports, R as React, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-CTFu9QFo.js";
-import { R as ReportsComponent, B as Box, G as Grid2, S as Sidebar } from "./Sidebar-Kaq3-wnM.js";
-import { a as FaPencil, F as FaRegTrashCan } from "./index-BWM9Cntx.js";
+import { r as reactExports, R as React, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-llj0GQDa.js";
+import { R as ReportsComponent, B as Box, G as Grid2, S as Sidebar } from "./Sidebar-DkcFO_WZ.js";
+import { a as FaPencil, F as FaRegTrashCan } from "./index-CMMxcWw_.js";
 import { a as axios } from "./axios-Cl7A0Ixg.js";
 import "./_commonjsHelpers-DWwsNxpa.js";
 const ModalEdit = ({

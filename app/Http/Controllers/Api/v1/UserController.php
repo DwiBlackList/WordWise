@@ -43,7 +43,7 @@ class UserController extends Controller
                 ]);
             }
             Log::info('User login attempt', ['email' => $request->input('email')]);
-Log::info('Generated token', ['token' => $token ?? 'No token generated']);
+            Log::info('Generated token', ['token' => $token ?? 'No token generated']);
 
 
             return response()->json(['message' => 'Invalid credentials'], 401);
@@ -69,28 +69,28 @@ Log::info('Generated token', ['token' => $token ?? 'No token generated']);
      * @param Request $request
      * @return JsonResponse
      */
-    // public function store(Request $request): JsonResponse
-    // {
-    //     $request->validate([
-    //         'name' => ['required', 'string', 'max:255'],
-    //         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-    //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
-    //         'school' => ['required', 'string', 'max:255'],
-    //     ]);
-
-    //     $user = User::create([
-    //         'name' => $request->input('name'),
-    //         'email' => $request->input('email'),
-    //         'password' => Hash::make($request->input('password')),
-    //         'school' => $request->input('school'),
-    //         'role' => 'student',
-    //     ]);
-
-    //     return response()->json([
-    //         'message' => 'User created successfully',
-    //         'data' => new UserResource($user)
-    //     ], 201);
-    // }
+    public function store(Request $request): JsonResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'school' => ['required', 'string', 'max:255'],
+        ]);
+    
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'school' => $request->input('school'),
+            'role' => 'student',
+        ]);
+    
+        return response()->json([
+            'message' => 'User created successfully',
+            'data' => new UserResource($user)
+        ], 201);
+    }
 
     /**
      * Display the specified user.

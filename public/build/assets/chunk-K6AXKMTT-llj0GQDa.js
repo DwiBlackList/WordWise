@@ -9245,7 +9245,6 @@ function useViewTransitionState(to, opts = {}) {
 new TextEncoder();
 export {
   BrowserRouter as B,
-  Link as L,
   React as R,
   requireReactDom as a,
   ReactDOM as b,
