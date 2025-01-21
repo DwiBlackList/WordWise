@@ -32,6 +32,7 @@ export default {
                 "infinite-scroll-partner":
                     "infinite-scroll-partner 25s linear infinite",
             },
+
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
