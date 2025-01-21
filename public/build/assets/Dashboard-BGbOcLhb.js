@@ -5,12 +5,12 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { c as createLucideIcon, r as reactExports, R as React, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-CTFu9QFo.js";
-import { R as ReportsComponent, B as Box, G as Grid2, S as Sidebar } from "./Sidebar-Kaq3-wnM.js";
+import { c as createLucideIcon, r as reactExports, R as React, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-llj0GQDa.js";
+import { R as ReportsComponent, B as Box, G as Grid2, S as Sidebar } from "./Sidebar-DkcFO_WZ.js";
 import { g as getDefaultExportFromCjs } from "./_commonjsHelpers-DWwsNxpa.js";
 import "./axios-Cl7A0Ixg.js";
 var require_Dashboard_007 = __commonJS({
-  "assets/Dashboard-BnrsLgNu.js"(exports, module) {
+  "assets/Dashboard-BGbOcLhb.js"(exports, module) {
     var _a, _b;
     /**
      * @license lucide-react v0.464.0 - ISC

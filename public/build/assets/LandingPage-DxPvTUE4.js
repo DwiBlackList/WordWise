@@ -1,5 +1,5 @@
-import { R as React, r as reactExports, j as jsxRuntimeExports, c as createLucideIcon, a as requireReactDom, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-CTFu9QFo.js";
-import { c as cn, S as Slot, B as Button, A as ArrowLeft } from "./button-Bd7MdRjr.js";
+import { R as React, r as reactExports, j as jsxRuntimeExports, c as createLucideIcon, a as requireReactDom, b as ReactDOM, B as BrowserRouter } from "./chunk-K6AXKMTT-llj0GQDa.js";
+import { c as cn, S as Slot, B as Button, A as ArrowLeft } from "./button-DUIenwLR.js";
 import "./_commonjsHelpers-DWwsNxpa.js";
 const ClassCard = ({
   number: number2,
@@ -7106,37 +7106,37 @@ const categories = [
   {
     number: "01",
     category: "Simulate Communication With Native Speaker",
-    description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+    description: "Practice real conversations using speech recognition technology to improve fluency and pronunciation, just like interacting with native speakers.",
     color: "text-green-500"
   },
   {
     number: "02",
     category: "Interactive Gamification",
-    description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+    description: "Master the language through 2.5D pixel art visuals by presenting materials in the form of fun games and challenges designed to make language learning fun and effective.",
     color: "text-pink-500"
   },
   {
     number: "03",
     category: "On The Go Learning",
-    description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+    description: "Access learning materials anytime, anywhere, making it easy to fit language practice into your daily routine.",
     color: "text-red-400"
   },
   {
     number: "04",
     category: "Content Managing System",
-    description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+    description: "Create a personalized learning experience by managing, customizing, and uploading curriculum-aligned content.",
     color: "text-purple-500"
   },
   {
     number: "05",
     category: "Grammar and Pronunciation Checker",
-    description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+    description: "Get instant grammar and pronunciation feedback to improve accuracy and confidence.",
     color: "text-amber-500"
   },
   {
     number: "06",
     category: "Progress Monitoring",
-    description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+    description: "Track your learning progress with detailed reports and analytics to keep you motivated and on track.",
     color: "text-blue-500"
   }
 ];
@@ -7243,6 +7243,10 @@ const schoolLogos = [
 ];
 const partnerLogos = [
   "/Bandung Techno Park.png",
+  "/indigoHub.png",
+  "/LogoLAC.webp",
+  "/ESStavfit.png",
+  "/Bandung_Techno_Park.png",
   "/indigoHub.png",
   "/LogoLAC.webp",
   "/ESStavfit.png"
@@ -7564,7 +7568,7 @@ const Star = createLucideIcon("Star", [
   ]
 ]);
 const Footer = () => {
-  return /* @__PURE__ */ React.createElement("div", { className: "flex flex-col md:flex-row justify-between px-4 md:px-32 py-6 md:py-8 bg-[#eabb81] space-y-6 md:space-y-0 items-center md:items-start text-center md:text-left" }, /* @__PURE__ */ React.createElement("div", { className: "space-y-2 flex flex-col items-center md:items-start" }, /* @__PURE__ */ React.createElement("h1", { className: "text-2xl" }, "Connect With Us"), /* @__PURE__ */ React.createElement("div", { className: "flex space-x-4" }, /* @__PURE__ */ React.createElement("a", { href: "https://www.instagram.com/lunarinteractive/" }, /* @__PURE__ */ React.createElement(Instagram, { className: "w-5 h-5 md:w-6 md:h-6" })), /* @__PURE__ */ React.createElement("a", { href: "https://www.linkedin.com/" }, /* @__PURE__ */ React.createElement(Linkedin, { className: "w-5 h-5 md:w-6 md:h-6" }))), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "Or Email Us At:"), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "contact@lunarinteractive.net")), /* @__PURE__ */ React.createElement("div", { className: "space-y-2 flex flex-col items-center md:items-start md:w-1/3" }, /* @__PURE__ */ React.createElement("h1", { className: "text-2xl" }, "Office"), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "Bandung Techno Park C103"), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "Jl. Telekomunikasi No.1, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center space-x-2" }, /* @__PURE__ */ React.createElement(Phone, { className: "w-5 h-5 md:w-6 md:h-6" }), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "+62 821-3066-0289"))));
+  return /* @__PURE__ */ React.createElement("div", { className: "flex flex-col md:flex-row justify-between px-4 md:px-32 py-6 md:py-8 bg-[#eabb81] space-y-6 md:space-y-0 items-center md:items-start text-center md:text-left" }, /* @__PURE__ */ React.createElement("div", { className: "space-y-2 flex flex-col items-center md:items-start" }, /* @__PURE__ */ React.createElement("h1", { className: "text-2xl" }, "Connect With Us"), /* @__PURE__ */ React.createElement("div", { className: "flex space-x-4" }, /* @__PURE__ */ React.createElement("a", { href: "https://www.instagram.com/lunarinteractive/" }, /* @__PURE__ */ React.createElement(Instagram, { className: "w-5 h-5 md:w-6 md:h-6" })), /* @__PURE__ */ React.createElement("a", { href: "" }, /* @__PURE__ */ React.createElement(Linkedin, { className: "w-5 h-5 md:w-6 md:h-6" }))), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "Or Email Us At:"), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "contact@lunarinteractive.net")), /* @__PURE__ */ React.createElement("div", { className: "space-y-2 flex flex-col items-center md:items-start md:w-1/3" }, /* @__PURE__ */ React.createElement("h1", { className: "text-2xl" }, "Office"), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "Bandung Techno Park C103"), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "Jl. Telekomunikasi No.1, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center space-x-2" }, /* @__PURE__ */ React.createElement(Phone, { className: "w-5 h-5 md:w-6 md:h-6" }), /* @__PURE__ */ React.createElement("p", { className: "text-sm md:text-base" }, "+62 821-3066-0289"))));
 };
 const Hero = () => {
   return /* @__PURE__ */ React.createElement("div", { className: "relative bg-[#89e8f5] overflow-hidden" }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-0 z-0" }, /* @__PURE__ */ React.createElement("div", { className: "absolute top-10 sm:top-20 left-10 sm:left-10" }, /* @__PURE__ */ React.createElement(
@@ -7595,7 +7599,7 @@ const Hero = () => {
       alt: "Cloud background",
       className: "w-[250%] sm:w-[200%] translate-y-3/4"
     }
-  ))), /* @__PURE__ */ React.createElement("div", { className: "relative z-10 flex flex-col items-center justify-center text-center py-6 sm:py-10 md:py-16 space-y-4 sm:space-y-6 md:space-y-8" }, /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement(
+  ))), /* @__PURE__ */ React.createElement("div", { className: "relative z-10 flex flex-col items-center justify-center text-center py-10 md:py-16 space-y-4 sm:space-y-6 md:space-y-8" }, /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement(
     "img",
     {
       src: "./videoscreen.svg",
@@ -7616,7 +7620,7 @@ const Hero = () => {
     "a",
     {
       className: "relative inline-block border-none bg-none p-0 cursor-pointer h-12 sm:h-14",
-      href: "#client"
+      href: "#contact"
     },
     /* @__PURE__ */ React.createElement(
       "img",
