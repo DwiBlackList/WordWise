@@ -15,7 +15,7 @@ class LevelsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -61,6 +61,8 @@ class LevelsController extends Controller
 
         // Get the class ID from the level
         $classId = $level->class_id;
+        $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
+
 
         // Get users who have joined the class
         $users = User::whereHas('joinedclass', function ($query) use ($classId) {
@@ -69,10 +71,17 @@ class LevelsController extends Controller
             $query->where('level_id', $id);
         }])->get();
 
-        return response()->json([
+        $combinedData = [
             'level' => $level,
-            'users' => $users
-        ], 201);
+            'users' => $users,
+            'dataUserLogin' => $dataUserLogin,
+
+        ];
+
+        $ssrData = json_encode($combinedData);
+
+
+        return view('levelDetail', compact('ssrData'));
     }
 
     /**

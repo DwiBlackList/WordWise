@@ -10,19 +10,20 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
 
-    const csrfToken = csrfTokenElement ? csrfTokenElement.getAttribute('content') : '';
+    const csrfToken = csrfTokenElement
+        ? csrfTokenElement.getAttribute("content")
+        : "";
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-
-            const response = await axios.post('/login', {
+            const response = await axios.post("/login", {
                 email,
                 password,
-                _token: csrfToken
+                _token: csrfToken,
             });
             // Handle successful login
-            window.location.href = '/home';
+            window.location.href = "/home";
         } catch (error) {
             // Handle login error
         }
@@ -48,13 +49,6 @@ const LoginForm = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button
-                    type="button"
-                    className="absolute right-3 top-2.5 sm:top-3 text-slate-400 hover:text-slate-600"
-                    aria-label="Toggle password visibility"
-                >
-                    <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
-                </button>
             </div>
 
             <div className="text-right">

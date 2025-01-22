@@ -92,12 +92,16 @@ class ClassesController extends Controller
         $userjoined = User::whereHas('joinedclass', function ($query) use ($id) {
             $query->where('class_id', $id);
         })->get();
-        // dd($userjoined);
+        // dd($levels);
+
+
+
 
         $combinedData = [
             'class' => $class,
             'levels' => $levels,
-            'dataUserLogin' => $dataUserLogin
+            'dataUserLogin' => $dataUserLogin,
+            'students' => $userjoined,
         ];
 
         $ssrData = json_encode($combinedData);

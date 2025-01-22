@@ -23,7 +23,7 @@ const partnerLogos = [
     "/indigoHub.png",
     "/LogoLAC.webp",
     "/ESStavfit.png",
-    "/Bandung_Techno_Park.png",
+    "/Bandung Techno Park.png",
     "/indigoHub.png",
     "/LogoLAC.webp",
     "/ESStavfit.png",
@@ -166,7 +166,7 @@ export const Client = () => {
                         </motion.h1>
                         <div className="flex w-full overflow-hidden">
                             <div
-                                className="flex animate-infinite-scroll gap-4 py-4 shrink-0"
+                                className="flex animate-infinite-scroll-partner gap-4 py-4 shrink-0"
                                 style={
                                     {
                                         "--count": partnerLogos.length,
