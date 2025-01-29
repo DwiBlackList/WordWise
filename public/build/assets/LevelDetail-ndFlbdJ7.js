@@ -35,9 +35,20 @@ const TableStudents = ({ data }) => {
   console.log(data);
   reactExports.useState(false);
   reactExports.useState(null);
-  return /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto w-full" }, /* @__PURE__ */ React.createElement("table", { className: "table-auto w-full border-collapse shadow-xl" }, /* @__PURE__ */ React.createElement("thead", { className: "bg-white border-b border-gray-200" }, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3" }, "Student Name"), /* @__PURE__ */ React.createElement("th", { className: "px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3" }, "Score"))), /* @__PURE__ */ React.createElement("tbody", null, data == null ? void 0 : data.map((row, index) => {
-    var _a2;
-    return /* @__PURE__ */ React.createElement("tr", { key: index, className: "bg-white hover:bg-gray-100" }, /* @__PURE__ */ React.createElement("td", { className: "px-2 sm:px-4 py-2" }, row.name), /* @__PURE__ */ React.createElement("td", { className: "px-2 sm:px-4 py-2" }, (_a2 = row.results[0]) == null ? void 0 : _a2.score));
+  const formatDate = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    };
+    return new Date(dateString).toLocaleDateString(void 0, options);
+  };
+  return /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto w-full" }, /* @__PURE__ */ React.createElement("table", { className: "table-auto w-full border-collapse shadow-xl" }, /* @__PURE__ */ React.createElement("thead", { className: "bg-white border-b border-gray-200" }, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4" }, "Student Name"), /* @__PURE__ */ React.createElement("th", { className: "px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4" }, "Score"), /* @__PURE__ */ React.createElement("th", { className: "px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4" }, "Created At"), /* @__PURE__ */ React.createElement("th", { className: "px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4" }, "Updated At"))), /* @__PURE__ */ React.createElement("tbody", null, data == null ? void 0 : data.map((row, index) => {
+    var _a2, _b, _c;
+    return /* @__PURE__ */ React.createElement("tr", { key: index, className: "bg-white hover:bg-gray-100" }, /* @__PURE__ */ React.createElement("td", { className: "px-2 sm:px-4 py-2" }, row.name), /* @__PURE__ */ React.createElement("td", { className: "px-2 sm:px-4 py-2" }, (_a2 = row.results[0]) == null ? void 0 : _a2.score), /* @__PURE__ */ React.createElement("td", { className: "px-2 sm:px-4 py-2" }, formatDate((_b = row.results[0]) == null ? void 0 : _b.created_at)), /* @__PURE__ */ React.createElement("td", { className: "px-2 sm:px-4 py-2" }, formatDate((_c = row.results[0]) == null ? void 0 : _c.updated_at)));
   }))));
 };
 const Page = ({ data }) => {

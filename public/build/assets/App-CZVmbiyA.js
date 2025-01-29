@@ -203,10 +203,12 @@ class Node {
   }
 }
 class DialogueNode extends Node {
-  constructor(x, y, { text = "" } = { text: "" }) {
+  constructor(x, y, { text = "", imagePath = "" } = { text: "", imagePath: "" }) {
     super(x, y);
     __publicField(this, "text");
+    __publicField(this, "imagePath");
     this.text = text;
+    this.imagePath = imagePath;
     this.element.className += " auto-resize dialogue-node";
     const label = document.createElement("span");
     label.className = "node-label";
@@ -221,19 +223,52 @@ class DialogueNode extends Node {
       const target = event.target;
       this.text = target.value;
     });
+    const imageUpload = document.createElement("input");
+    imageUpload.type = "file";
+    imageUpload.accept = "image/*";
+    imageUpload.className = "dialogue-image-upload";
+    this.element.appendChild(imageUpload);
+    imageUpload.addEventListener("change", async (event) => {
+      var _a;
+      const target = event.target;
+      if (target.files && target.files[0]) {
+        const formData = new FormData();
+        formData.append("file", target.files[0]);
+        const csrfToken = (_a = document.querySelector('meta[name="csrf-token"]')) == null ? void 0 : _a.getAttribute("content");
+        try {
+          const response = await fetch("/levels/upload/image", {
+            method: "POST",
+            headers: {
+              "X-CSRF-TOKEN": csrfToken || ""
+            },
+            body: formData
+          });
+          if (!response.ok) {
+            throw new Error("Image upload failed");
+          }
+          const result = await response.json();
+          this.imagePath = result.filePath;
+        } catch (error) {
+          alert("Image upload failed");
+        }
+      }
+    });
   }
   serialize() {
     return {
       ...super.serialize(),
-      text: this.text
+      text: this.text,
+      imagePath: this.imagePath
     };
   }
 }
 class ChoiceNode extends Node {
-  constructor(x, y, { text = "" } = { text: "" }) {
+  constructor(x, y, { text = "", imagePath = "" } = { text: "", imagePath: "" }) {
     super(x, y);
     __publicField(this, "text");
+    __publicField(this, "imagePath");
     this.text = text;
+    this.imagePath = imagePath;
     this.element.className += " auto-resize choice-node";
     const label = document.createElement("span");
     label.className = "node-label";
@@ -248,11 +283,42 @@ class ChoiceNode extends Node {
       const target = event.target;
       this.text = target.value;
     });
+    const imageUpload = document.createElement("input");
+    imageUpload.type = "file";
+    imageUpload.accept = "image/*";
+    imageUpload.className = "choice-image-upload";
+    this.element.appendChild(imageUpload);
+    imageUpload.addEventListener("change", async (event) => {
+      var _a;
+      const target = event.target;
+      if (target.files && target.files[0]) {
+        const formData = new FormData();
+        formData.append("file", target.files[0]);
+        const csrfToken = (_a = document.querySelector('meta[name="csrf-token"]')) == null ? void 0 : _a.getAttribute("content");
+        try {
+          const response = await fetch("/levels/upload/image", {
+            method: "POST",
+            headers: {
+              "X-CSRF-TOKEN": csrfToken || ""
+            },
+            body: formData
+          });
+          if (!response.ok) {
+            throw new Error("Image upload failed");
+          }
+          const result = await response.json();
+          this.imagePath = result.filePath;
+        } catch (error) {
+          alert("Image upload failed");
+        }
+      }
+    });
   }
   serialize() {
     return {
       ...super.serialize(),
-      text: this.text
+      text: this.text,
+      imagePath: this.imagePath
     };
   }
 }
@@ -297,7 +363,15 @@ class Export {
 `;
         result += `${indent}	<Character>Villager</Character>
 `;
-        result += `${indent}	<Question>${currentNode.text}</Question>
+        result += `${indent}	<Question>
+`;
+        if (currentNode.imagePath) {
+          result += `${indent}		<PhotoPath>https://lunarinteractive.net${currentNode.imagePath}</PhotoPath>
+`;
+        }
+        result += `${indent}		${currentNode.text}
+`;
+        result += `${indent}	</Question>
 `;
         const nextChoices = currentNode.connections;
         nextChoices.forEach((choiceId, index) => {
@@ -313,7 +387,15 @@ class Export {
               }
               actionValue = nodeIdToDialogueIndex[nextNodeId];
             }
-            result += `${indent}	<${optionTag} Action="${actionValue}">${choiceNode.text || "..."}</${optionTag}>
+            result += `${indent}	<${optionTag} Action="${actionValue}">
+`;
+            if (choiceNode.imagePath) {
+              result += `${indent}		<PhotoPath>https://lunarinteractive.net${choiceNode.imagePath}</PhotoPath>
+`;
+            }
+            result += `${indent}		${choiceNode.text || "..."}
+`;
+            result += `${indent}	</${optionTag}>
 `;
           }
         });
