@@ -39,4 +39,5 @@ Route::get('/editor/{class_id}', [LevelsController::class, 'create'])->name('edi
 
 Route::resource('classes', ClassesController::class);
 Route::resource('levels', LevelsController::class);
+Route::post('levels/upload/image', [LevelsController::class , 'uploadImage']);
 Route::get('data/users/login', [Controller::class, 'dataUserLogin']);

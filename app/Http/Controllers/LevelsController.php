@@ -7,6 +7,7 @@ use App\Models\Classes;
 use App\Models\Levels;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LevelsController extends Controller
 {
@@ -111,5 +112,22 @@ class LevelsController extends Controller
         // Redirect ke halaman sebelumnya dengan pesan sukses
         // return redirect()->back()->with('success', 'Class deleted successfully.');
         return response()->json(['success' => 'Level deleted successfully'], 201);
+    }
+
+    public function uploadImage(Request $request)
+    {
+        // Validate the request to ensure a file is provided
+        $request->validate([
+            'file' => 'required|image|max:2048', // Max size 2MB
+        ]);
+
+        // Store the uploaded file in the 'public/images' directory
+        $path = $request->file('file')->store('public/images');
+
+        // Generate the URL to the stored file
+        $url = Storage::url($path);
+
+        // Return the file path as a JSON response
+        return response()->json(['filePath' => $url]);
     }
 }

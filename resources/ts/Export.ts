@@ -5,6 +5,7 @@
     y: number;
     connections: string[];
     text?: string;
+    imagePath?: string; // Add imagePath property to Node interface
 }
 
 interface DialogueData {
@@ -58,7 +59,12 @@ export class Export {
                 const dialogueTag = `Dialog${nodeIdToDialogueIndex[nodeId]}`;
                 result += `${indent}<${dialogueTag}>\n`;
                 result += `${indent}\t<Character>Villager</Character>\n`;
-                result += `${indent}\t<Question>${currentNode.text}</Question>\n`;
+                result += `${indent}\t<Question>\n`;
+                if (currentNode.imagePath) {
+                    result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net/${currentNode.imagePath}</PhotoPath>\n`;
+                }
+                result += `${indent}\t\t${currentNode.text}\n`;
+                result += `${indent}\t</Question>\n`;
 
                 // Process each choice
                 const nextChoices = currentNode.connections;
@@ -75,7 +81,12 @@ export class Export {
                             }
                             actionValue = nodeIdToDialogueIndex[nextNodeId];
                         }
-                        result += `${indent}\t<${optionTag} Action="${actionValue}">${choiceNode.text || '...'}</${optionTag}>\n`;
+                        result += `${indent}\t<${optionTag} Action="${actionValue}">\n`;
+                        if (choiceNode.imagePath) {
+                            result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net/${choiceNode.imagePath}</PhotoPath>\n`;
+                        }
+                        result += `${indent}\t\t${choiceNode.text || '...'}\n`;
+                        result += `${indent}\t</${optionTag}>\n`;
                     }
                 });
 

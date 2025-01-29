@@ -6,6 +6,7 @@
     <title>Editor</title>
     <!-- Styles -->
     @vite('resources/css/editor.css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="antialiased">
 
