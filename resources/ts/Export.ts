@@ -61,7 +61,7 @@ export class Export {
                 result += `${indent}\t<Character>Villager</Character>\n`;
                 result += `${indent}\t<Question>\n`;
                 if (currentNode.imagePath) {
-                    result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net/${currentNode.imagePath}</PhotoPath>\n`;
+                    result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net${currentNode.imagePath}</PhotoPath>\n`;
                 }
                 result += `${indent}\t\t${currentNode.text}\n`;
                 result += `${indent}\t</Question>\n`;
@@ -83,7 +83,7 @@ export class Export {
                         }
                         result += `${indent}\t<${optionTag} Action="${actionValue}">\n`;
                         if (choiceNode.imagePath) {
-                            result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net/${choiceNode.imagePath}</PhotoPath>\n`;
+                            result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net${choiceNode.imagePath}</PhotoPath>\n`;
                         }
                         result += `${indent}\t\t${choiceNode.text || '...'}\n`;
                         result += `${indent}\t</${optionTag}>\n`;
