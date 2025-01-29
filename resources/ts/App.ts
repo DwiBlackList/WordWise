@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Show pop-up notification
         alert("Level has been created successfully.");
-        // window.location.href = "/classes/"+class_id.value;
+        window.location.href = "/classes/"+class_id.value;
     });
 
     document.getElementById("add-start")?.addEventListener("click", () => {
