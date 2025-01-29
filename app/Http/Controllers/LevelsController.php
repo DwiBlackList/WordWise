@@ -64,7 +64,6 @@ class LevelsController extends Controller
         $classId = $level->class_id;
         $dataUserLogin = app(Controller::class)->dataUserLogin()->getData();
 
-
         // Get users who have joined the class
         $users = User::whereHas('joinedclass', function ($query) use ($classId) {
             $query->where('class_id', $classId);
@@ -72,15 +71,22 @@ class LevelsController extends Controller
             $query->where('level_id', $id);
         }])->get();
 
+        // Format the created_at and updated_at fields
+        $users->each(function ($user) {
+            $user->results->each(function ($result) {
+                $result->created_at = $result->created_at->format('Y-m-d H:i:s');
+                $result->updated_at = $result->updated_at->format('Y-m-d H:i:s');
+            });
+        });
+
         $combinedData = [
             'level' => $level,
             'users' => $users,
             'dataUserLogin' => $dataUserLogin,
-
         ];
 
         $ssrData = json_encode($combinedData);
-
+        // dd($ssrData);
 
         return view('levelDetail', compact('ssrData'));
     }

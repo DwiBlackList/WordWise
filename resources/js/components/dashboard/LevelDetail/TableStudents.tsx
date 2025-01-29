@@ -39,16 +39,34 @@ const TableStudents: React.FC<TableProps> = ({ data }) => {
         setSelectedRow(null);
     };
 
+    const formatDate = (dateString: string) => {
+        const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
     return (
         <div className="overflow-x-auto w-full">
             <table className="table-auto w-full border-collapse shadow-xl">
                 <thead className="bg-white border-b border-gray-200">
                     <tr>
-                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3">
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4">
                             Student Name
                         </th>
-                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3">
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4">
                             Score
+                        </th>
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4">
+                            Created At
+                        </th>
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4">
+                            Updated At
                         </th>
                     </tr>
                 </thead>
@@ -58,6 +76,12 @@ const TableStudents: React.FC<TableProps> = ({ data }) => {
                             <td className="px-2 sm:px-4 py-2">{row.name}</td>
                             <td className="px-2 sm:px-4 py-2">
                                 {row.results[0]?.score}
+                            </td>
+                            <td className="px-2 sm:px-4 py-2">
+                                {formatDate(row.results[0]?.created_at)}
+                            </td>
+                            <td className="px-2 sm:px-4 py-2">
+                                {formatDate(row.results[0]?.updated_at)}
                             </td>
                         </tr>
                     ))}
