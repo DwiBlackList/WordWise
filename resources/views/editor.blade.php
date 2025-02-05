@@ -3,26 +3,30 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    {{--    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">--}}
-
+    <title>Editor</title>
     <!-- Styles -->
-    @vite('resources/css/app.css')
+    @vite('resources/css/editor.css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="antialiased">
 
 <div id="toolbar">
     <button id="add-dialogue">Add Dialogue</button>
     <button id="add-choice">Add Choice</button>
-    <button id="add-end">Add End</button>
-    <button id="export">export</button>
+    <!-- <button id="add-start">Add Start</button> -->
+    <!-- <button id="add-end">Add End</button> -->
     <button id="undo">Undo</button>
     <button id="redo">Redo</button>
     <button id="reset-zoom">Reset Zoom</button>
+    <button id="export">Save</button>
     <div id="zoom-label">100%</div>
+</div>
+
+<!-- Input Text di Pojok Kiri Atas -->
+<div id="top-left-input">
+    <input type="text" id="level_name" placeholder="Enter Name Level..">
+    <input type="text" id="chapter_name" placeholder="Enter Name Chapter..">
+    <input type="hidden" id="class_id" name="class_id">
 </div>
 
 <div id="canvas-container">
@@ -39,20 +43,28 @@
     <div id="tooltip-content">
         <p><strong>Shortcuts:</strong></p>
         <ul>
-            <li><strong>Add Dialogue:</strong> Click "Add Dialogue"</li>
+            <!-- <li><strong>Add Dialogue:</strong> Click "Add Dialogue"</li>
             <li><strong>Add Choice:</strong> Click "Add Choice"</li>
-            <li><strong>Add Label:</strong> Click "Add Label"</li>
+            <li><strong>Add Label:</strong> Click "Add Label"</li> -->
+            <li><strong>Deselect Node :</strong> Esc Key / P</li>
             <li><strong>Undo:</strong> Ctrl + Z</li>
             <li><strong>Redo:</strong> Ctrl + Shift + Z</li>
             <li><strong>Delete Node:</strong> X or Delete key</li>
-            <li><strong>Zoom:</strong> Shift + Scroll</li>
+            <li><strong>Zoom:</strong> (Shift / Ctlr) + Scroll</li>
             <li><strong>Pan:</strong> Left Click + Drag</li>
-            <li><strong>Reset Zoom:</strong> Click "Reset Zoom"</li>
+            <!-- <li><strong>Reset Zoom:</strong> Click "Reset Zoom"</li> -->
         </ul>
     </div>
 </div>
 
+<script>
+    // Ambil angka setelah 'editor/' dari URL
+    const url = window.location.href;
+    const class_id = url.split('/').pop();
 
+    // Set nilai input hidden dengan levelId
+    document.getElementById('class_id').value = class_id;
+</script>
 @vite(['resources/ts/App.ts'])
 </body>
 </html>

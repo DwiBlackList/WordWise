@@ -1,0 +1,155 @@
+import React, { useState, useEffect } from "react";
+import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
+import Modal from "./modal";
+import ModalEdit from "./modalEdit";
+import axios from "axios";
+
+interface TableProps {
+    data: {
+        name: string;
+        school: string;
+        role: string;
+        token: string;
+    }[];
+}
+
+const Table: React.FC<TableProps> = ({ data }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedRow, setSelectedRow] = useState<{
+        class_name: string;
+        token: string;
+    } | null>(null);
+
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editData, setEditData] = useState<{
+        name: string;
+        school: string;
+        password: string;
+        role: string;
+    } | null>(null);
+
+    const handleOpenModal = () => setIsModalOpen(true);
+    const handleCloseModal = () => setIsModalOpen(false);
+
+    const handleOpenEditModal = (row: any) => {
+        setEditData(row);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => setIsEditModalOpen(false);
+
+    const handleConfirmEdit = async (formData: any) => {
+        try {
+            const response = await axios.put(`/users/${formData.id}`, formData);
+            if (response.status === 200) {
+                console.log("User updated successfully");
+                window.location.reload();
+            } else {
+                console.error("Failed to update user");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
+    const handleDelete = async (id: string) => {
+        try {
+            const response = await axios.delete(`/users/${id}`);
+            if (response.status === 200) {
+                console.log("Class deleted successfully");
+                window.location.reload();
+            } else {
+                console.error("Failed to delete class");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
+    const handleEdit = async (id: string) => {
+        try {
+            const response = await axios.put(`/users/${id}`);
+            if (response.status === 200) {
+                console.log("User update successfully");
+                window.location.reload();
+            } else {
+                console.error("Failed to update user");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
+    return (
+        <div className="overflow-x-auto w-full">
+            <table className="table-auto w-full border-collapse shadow-xl">
+                <thead className="bg-white border-b border-gray-200">
+                    <tr>
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3">
+                            Name
+                        </th>
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/3">
+                            School
+                        </th>
+                        <th className="px-2 sm:px-4 py-2 text-left text-gray-600 w-1/4">
+                            Role
+                        </th>
+                        <th className="px-2 sm:px-4 py-2 text-center text-gray-600 w-1/6">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data?.map((row, index) => (
+                        <tr
+                            key={index}
+                            className="bg-white cursor-pointer hover:bg-gray-100"
+                        >
+                            <td className="px-2 sm:px-4 py-2">{row.name}</td>
+                            <td className="px-2 sm:px-4 py-2">{row.school}</td>
+                            <td className="px-2 sm:px-4 py-2">{row.role}</td>
+                            <td className="px-2 sm:px-4 py-2 text-center">
+                                <div className="flex gap-4 justify-center">
+                                    <button
+                                        className="text-gray-500 transition duration-200"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleOpenEditModal(row);
+                                        }}
+                                    >
+                                        <FaPencil />
+                                    </button>
+                                    <button
+                                        className="text-gray-500 transition duration-200"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (
+                                                window.confirm(
+                                                    `Are you sure you want to delete ${row.name}?`
+                                                )
+                                            ) {
+                                                handleDelete(row.id);
+                                            }
+                                        }}
+                                    >
+                                        <FaRegTrashCan />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            {isEditModalOpen && editData && (
+                <ModalEdit
+                    isOpen={isEditModalOpen}
+                    onClose={handleCloseEditModal}
+                    onConfirm={handleConfirmEdit}
+                    initialData={editData}
+                />
+            )}
+        </div>
+    );
+};
+
+export default Table;

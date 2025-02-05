@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2.12",
         "guzzlehttp/guzzle": "^7.2",
+        "illuminate/auth": "*",
         "laravel/framework": "^11.29.0",
         "laravel/sanctum": "^4.0.0",
         "laravel/tinker": "^2.7"
@@ -14,6 +15,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.2",
         "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^2.3",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",

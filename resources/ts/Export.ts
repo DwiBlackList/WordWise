@@ -5,10 +5,14 @@
     y: number;
     connections: string[];
     text?: string;
+    imagePath?: string; // Add imagePath property to Node interface
 }
 
 interface DialogueData {
     dialogue_data: string;
+    level_name: string;
+    chapter_name: string;
+    class_id: string;
 }
 
 interface ApiResponse {
@@ -16,85 +20,117 @@ interface ApiResponse {
     data: {
         id: number;
         dialogue_data: string;
+        level_name: string;
+        chapter_name: string;
+        class_id: string;
     };
 }
 
 export class Export {
-    constructor(data: Node[]) {
+    constructor(data: Node[], private level_name: string, private chapter_name: string, private class_id: string) {
         this.convertDialogue(data);
     }
 
     async convertDialogue(data: Node[]) {
-        const dialogue: string[] = [];
         const nodeMap: Record<string, Node> = {};
-        const incomingConnectionsCount: Record<string, number> = {}; // Track incoming connections per node
-        const createdLabels: Record<string, string> = {}; // Track labels for nodes with multiple incoming connections
+        const nodeIdToDialogueIndex: Record<string, number> = {}; // Map to store dialogue index by node ID
+        let dialogueCounter = 0; // Counter for numbering dialogues
+        const processedNodes: Set<string> = new Set(); // Set to track processed nodes
 
-        // Populate the nodeMap and count incoming connections
+        // Populate the nodeMap
         data.forEach(node => {
             nodeMap[node.id] = node;
-            node.connections.forEach(connectionId => {
-                incomingConnectionsCount[connectionId] = (incomingConnectionsCount[connectionId] || 0) + 1;
-            });
         });
 
-        const processNode = (nodeId: string, indent: string = "") => {
-            const currentNode = nodeMap[nodeId];
-
-            // Add label if necessary (only if node has multiple incoming connections)
-            if (incomingConnectionsCount[nodeId] > 1 && !createdLabels[nodeId]) {
-                const labelName = `manyToOne_${Object.keys(createdLabels).length + 1}`;
-                createdLabels[nodeId] = labelName;
-                dialogue.push(`${indent}label ${labelName}`);
-            } else if (incomingConnectionsCount[nodeId] > 1 && createdLabels[nodeId]) {
-                dialogue.push(`${indent}jump ${createdLabels[nodeId]}`);
-                return;
+        const processNode = (nodeId: string, indent: string = ""): string => {
+            if (processedNodes.has(nodeId)) {
+                return ""; // Skip already processed nodes
             }
+            processedNodes.add(nodeId);
+
+            const currentNode = nodeMap[nodeId];
+            if (!currentNode) {
+                throw new Error(`Node with ID ${nodeId} not found in nodeMap`);
+            }
+            let result = "";
 
             // Process DialogueNode
             if (currentNode.type === 'DialogueNode') {
-                dialogue.push(`${indent}Villager: ${currentNode.text}`);
+                const dialogueTag = `Dialog${nodeIdToDialogueIndex[nodeId]}`;
+                result += `${indent}<${dialogueTag}>\n`;
+                result += `${indent}\t<Character>Villager</Character>\n`;
+                result += `${indent}\t<Question>\n`;
+                if (currentNode.imagePath) {
+                    result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net${currentNode.imagePath}</PhotoPath>\n`;
+                }
+                result += `${indent}\t\t${currentNode.text}\n`;
+                result += `${indent}\t</Question>\n`;
 
                 // Process each choice
                 const nextChoices = currentNode.connections;
+                nextChoices.forEach((choiceId, index) => {
+                    const choiceNode = nodeMap[choiceId];
+                    if (choiceNode) {
+                        const optionTag = `Option${String.fromCharCode(65 + index)}`;
+                        const nextNodeId = choiceNode.connections.length > 0 ? choiceNode.connections[0] : null;
+                        let actionValue = -1;
+                        if (nextNodeId) {
+                            if (!nodeIdToDialogueIndex.hasOwnProperty(nextNodeId)) {
+                                nodeIdToDialogueIndex[nextNodeId] = dialogueCounter;
+                                dialogueCounter++;
+                            }
+                            actionValue = nodeIdToDialogueIndex[nextNodeId];
+                        }
+                        result += `${indent}\t<${optionTag} Action="${actionValue}">\n`;
+                        if (choiceNode.imagePath) {
+                            result += `${indent}\t\t<PhotoPath>https://lunarinteractive.net${choiceNode.imagePath}</PhotoPath>\n`;
+                        }
+                        result += `${indent}\t\t${choiceNode.text || '...'}\n`;
+                        result += `${indent}\t</${optionTag}>\n`;
+                    }
+                });
+
+                result += `${indent}</${dialogueTag}>\n`;
+
+                // Process each choice's connections
                 nextChoices.forEach(choiceId => {
                     const choiceNode = nodeMap[choiceId];
-                    dialogue.push(`${indent}- ${choiceNode.text}`);
-
-                    if (choiceNode.connections.length > 0) {
+                    if (choiceNode && choiceNode.connections.length > 0) {
                         const nextNodeId = choiceNode.connections[0];
-                        const nextIndent = indent + "\t";
-
-                        // Check if next node needs a jump
-                        if (incomingConnectionsCount[nextNodeId] > 1 && createdLabels[nextNodeId]) {
-                            dialogue.push(`${nextIndent}jump ${createdLabels[nextNodeId]}`);
-                        } else {
-                            processNode(nextNodeId, nextIndent);
+                        if (!nodeIdToDialogueIndex.hasOwnProperty(nextNodeId)) {
+                            nodeIdToDialogueIndex[nextNodeId] = dialogueCounter;
+                            dialogueCounter++;
                         }
+                        result += processNode(nextNodeId, indent);
                     }
                 });
             }
-            // Process ChoiceNode
-            else if (currentNode.type === 'ChoiceNode') {
-                if (currentNode.connections.length > 0) {
-                    const nextNodeId = currentNode.connections[0];
-                    if (incomingConnectionsCount[nextNodeId] > 1 && createdLabels[nextNodeId]) {
-                        dialogue.push(`${indent}jump ${createdLabels[nextNodeId]}`);
-                    } else {
-                        processNode(nextNodeId, indent);
-                    }
-                }
-            }
+
+            return result;
         };
 
         // Start processing from StartNode
         const startNode = data.find(node => node.type === 'StartNode');
+        let dialogueXML = "<Level>\n";
         if (startNode && startNode.connections.length > 0) {
-            processNode(startNode.connections[0]);
+            startNode.connections.forEach(connectionId => {
+                if (!nodeIdToDialogueIndex.hasOwnProperty(connectionId)) {
+                    nodeIdToDialogueIndex[connectionId] = dialogueCounter;
+                    dialogueCounter++;
+                }
+                dialogueXML += processNode(connectionId, "\t");
+            });
         }
+        dialogueXML += "</Level>";
+
         // Output the generated dialogue
-        console.log(dialogue.join('\n'));
-        await this.storeDialogue('../api/v1/dialogues', {dialogue_data: dialogue.join('\n')});
+        console.log(dialogueXML);
+        await this.storeDialogue('../api/v1/levels', {
+            dialogue_data: dialogueXML,
+            level_name: this.level_name,
+            chapter_name: this.chapter_name,
+            class_id: this.class_id
+        });
     }
 
     async storeDialogue(url: string, data: DialogueData): Promise<ApiResponse | null> {
@@ -119,8 +155,3 @@ export class Export {
         }
     }
 }
-
-// Example Usage
-// Assuming the data variable holds the JSON structure you provided:
-// const data: Node[] = [...]; // Your data here
-// new Export(data);

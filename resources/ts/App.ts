@@ -2,226 +2,91 @@
 import {DialogueNode} from "./nodes/DialogueNode";
 import {ChoiceNode} from "./nodes/ChoiceNode";
 import {StartNode} from "./nodes/StartNode";
+import {EndNode} from "./nodes/EndNode";
 import {Node} from "./Node";
 import {Export} from "./Export";
-// import {EndNode} from "./nodes/EndNode";
+import {CanvasManager} from "./CanvasManager";
 
 document.addEventListener("DOMContentLoaded", () => {
-// Initialize NodeManager with the ID of the container element
+    // Initialize NodeManager with the ID of the container element
     const containerId = "node-container";
     const nodeManager = new NodeManager(containerId);
-    // const data: Node[] = [
-    //     {
-    //         "id": "node1",
-    //         "type": "StartNode",
-    //         "x": 50,
-    //         "y": 496,
-    //         "connections": [
-    //             "node2"
-    //         ]
-    //     },
-    //     {
-    //         "id": "node2",
-    //         "type": "DialogueNode",
-    //         "x": 100,
-    //         "y": 100,
-    //         "connections": [
-    //             "node4",
-    //             "node6",
-    //             "node8"
-    //         ],
-    //         "text": "Halo, nama saya babi, nama kamu siapa?"
-    //     },
-    //     {
-    //         "id": "node4",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node9"
-    //         ],
-    //         "text": "Halo, nama saya anjing"
-    //     },
-    //     {
-    //         "id": "node6",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node9"
-    //         ],
-    //         "text": "Hai, aku anjing"
-    //     },
-    //     {
-    //         "id": "node8",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node10"
-    //         ],
-    //         "text": "oh hai, saya anjing"
-    //     },
-    //     {
-    //         "id": "node9",
-    //         "type": "DialogueNode",
-    //         "x": 100,
-    //         "y": 100,
-    //         "connections": [
-    //             "node12",
-    //             "node14"
-    //         ],
-    //         "text": "senang bertemu dengan mu anjing"
-    //     },
-    //     {
-    //         "id": "node10",
-    //         "type": "DialogueNode",
-    //         "x": 100,
-    //         "y": 100,
-    //         "connections": [
-    //             "node16",
-    //             "node18",
-    //             "node14"
-    //         ],
-    //         "text": "salam kenal anjing"
-    //     },
-    //     {
-    //         "id": "node12",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node20"
-    //         ],
-    //         "text": "kamu suka apa babi?"
-    //     },
-    //     {
-    //         "id": "node14",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node19"
-    //         ],
-    //         "text": "kamu seperti apa babi?"
-    //     },
-    //     {
-    //         "id": "node16",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node21"
-    //         ],
-    //         "text": "kamu babi"
-    //     },
-    //     {
-    //         "id": "node18",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node21"
-    //         ],
-    //         "text": "kamu bau"
-    //     },
-    //     {
-    //         "id": "node19",
-    //         "type": "DialogueNode",
-    //         "x": 100,
-    //         "y": 100,
-    //         "connections": [
-    //             "node23",
-    //             "node25"
-    //         ],
-    //         "text": "aku seperti babi"
-    //     },
-    //     {
-    //         "id": "node20",
-    //         "type": "DialogueNode",
-    //         "x": 100,
-    //         "y": 100,
-    //         "connections": [
-    //             "node23",
-    //             "node25"
-    //         ],
-    //         "text": "aku suka anjing"
-    //     },
-    //     {
-    //         "id": "node21",
-    //         "type": "DialogueNode",
-    //         "x": 100,
-    //         "y": 100,
-    //         "connections": [
-    //             "node25",
-    //             "node23"
-    //         ],
-    //         "text": "walah, kamu ngentot"
-    //     },
-    //     {
-    //         "id": "node23",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node26"
-    //         ],
-    //         "text": "the fuck"
-    //     },
-    //     {
-    //         "id": "node25",
-    //         "type": "ChoiceNode",
-    //         "x": 200,
-    //         "y": 200,
-    //         "connections": [
-    //             "node26"
-    //         ],
-    //         "text": "walawe"
-    //     },
-    //     {
-    //         "id": "node26",
-    //         "type": "DialogueNode",
-    //         "x": 100,
-    //         "y": 100,
-    //         "connections": [],
-    //         "text": "ya gitulah"
-    //     }
-    // ];
+    const canvasManager = new CanvasManager(containerId, "zoom-label");
 
     nodeManager.addNode(new StartNode(50, window.innerHeight / 2));
+    // nodeManager.addNode(new EndNode(window.innerWidth - 200, window.innerHeight / 2));
 
-// Event listeners for node creation
+    // Event listeners for node creation
     document.getElementById("add-dialogue")?.addEventListener("click", () => {
         nodeManager.addNode(new DialogueNode(100, 100));
     });
 
     document.getElementById("add-choice")?.addEventListener("click", () => {
-        const node = new ChoiceNode(200, 200);
-        nodeManager.addNode(new ChoiceNode(200, 200));
+        nodeManager.addNode(new ChoiceNode(400, 400));
     });
 
     document.getElementById("export")?.addEventListener("click", () => {
+        const level_name = document.getElementById("level_name") as HTMLInputElement;
+        const chapter_name = document.getElementById("chapter_name") as HTMLInputElement;
+        const class_id = document.getElementById("class_id") as HTMLInputElement;
+
+        // Validate level_name input
+        if (!level_name.value.trim()) {
+            level_name.style.borderColor = "red";
+            alert("Level name is required.");
+            return;
+        } else if(!chapter_name.value.trim()) {
+            chapter_name.style.borderColor = "red";
+            alert("Chapter name is required.");
+            return;
+        } else {
+            level_name.style.borderColor = ""; // Reset border color if valid
+        }
+
         const nodes = nodeManager.getNodes();
         const serializedData = nodes.map(node => node.serialize());
-        new Export(serializedData);
+
+        // Include level_name and class_id in the data sent to Export
+        new Export(serializedData, level_name.value, chapter_name.value, class_id.value );
+
+        // Show pop-up notification
+        alert("Level has been created successfully.");
+        window.location.href = "/classes/"+class_id.value;
     });
 
-// document.getElementById("addStartNode")?.addEventListener("click", () => {
-//     const node = new StartNode(nodeManager.generateNodeId(), 50, 50);
-//     addNode(node);
-// });
-//
-// document.getElementById("addEndNode")?.addEventListener("click", () => {
-//     const node = new EndNode(nodeManager.generateNodeId(), 300, 300);
-//     addNode(node);
-// });
+    document.getElementById("add-start")?.addEventListener("click", () => {
+        nodeManager.addNode(new StartNode(0, window.innerHeight / 2));
+    });
 
-// Undo and redo actions
+    // document.getElementById("add-end")?.addEventListener("click", () => {
+    //     nodeManager.addNode(new EndNode(0, window.innerHeight / 2));
+    // });
+
+    // Undo and redo actions
     document.getElementById("undo")?.addEventListener("click", () => {
         nodeManager.undo();
     });
 
     document.getElementById("redo")?.addEventListener("click", () => {
         nodeManager.redo();
-    })
+    });
+
+    // Shortcut for selecting nodes
+    document.addEventListener("keydown", (event) => {
+        if (event.ctrlKey && event.key === 'z') {
+            nodeManager.undo();
+        } else if (event.ctrlKey && event.shiftKey && event.key === 'Z') {
+            nodeManager.redo();
+        }else if (event.key === 'Escape' || event.key === 'p' || event.key === 'P') {
+            nodeManager.deselectNode();
+        } else if (event.key === 'x' || event.key === 'Delete') {
+            if (nodeManager.selectedNode) {
+                nodeManager.removeNodeFromCanvas(nodeManager.selectedNode.id);
+                nodeManager.deselectNode();
+            }
+        }
+    });
+
+    // Zoom and pan actions
+    canvasManager.initEventListeners();
 });
