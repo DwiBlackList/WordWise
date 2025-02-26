@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
         // Create admin users
         User::factory()->create([
-            'name' => 'Lunar Interactive',
-            'email' => 'lunarinteractive@gmail.com',
-            'password' => Hash::make('lunarinteractivestartup'),
+            'name' => 'Admins',
+            'email' => 'admin@admin.admin',
+            'password' => Hash::make('admin12345678'),
             'role' => 'admins',
         ]);
         
