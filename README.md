@@ -1,66 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+![Logo](/public/logo.svg)
+<hr>
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/c09ef627-128e-491e-a79a-2c05fa9aee4f" width="70%" autoplay="" loop="" poster=""> </video>
+</div>
 
+# About WordWise Web
+The WordWise Web is to supports a Educational Game to learn speaking english : [Wordwise: Speak English Easily](https://play.google.com/store/apps/details?id=com.LunarInteractive.Wordwisepocket).
+<br>
+Main function of this website is to create content for the game such as make class and levels.
+
+## Demo
+<table>
+    <tr>
+        <td colspan=3 align="center"><a href="https://word-wise-main-nd8dqu.laravel.cloud">Demo Link</a></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>:</td>
+        <td>admin@admin.admin</td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td>:</td>
+        <td>admin12345678</td>
+    </tr>
+</table>
+
+> [!NOTE]
+> The Demo Link is not connected database with the game. This is only used to find out how to create content for the game.<br>
+> If you are interested in the game, you can visit the [Main Website](https://lunarinteractive.net/) then contact the website and game owner in the contact section to request a teacher account<br>
+
+<h3>Tour Guide</h3>
+
+1. Go to login page , fill the email & password<br>
+
+![login](https://github.com/user-attachments/assets/8fc925d5-5a93-4bcf-a56b-78781387ea86)
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    Login Page Image
 </p>
 
-## About Laravel
+2. At the dashboard there is a report class , You can select a class report for the class you have created , And there is Sidebar
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![dashboard](https://github.com/user-attachments/assets/960410e2-f10c-4f2f-b19a-a0762c20c03a)
+<p align="center">
+    Dashboard Page Image
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![selectclass](https://github.com/user-attachments/assets/465e009e-7ef6-4e39-9c82-2f5158e1df58)
+<p align="center">
+    Selecting Class Image
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![sidebar](https://github.com/user-attachments/assets/602f12f6-9fa0-4224-b8ec-692120a5193c)
+<p align="center">
+    Sidebar Image
+</p>
 
-## Learning Laravel
+3. Go to Class , To create class just hit Add Data , And to create Level at the Class press the pencil beside the trash for delete
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![class](https://github.com/user-attachments/assets/43e87709-5c81-401b-afab-fea4904f856c)
+<p align="center">
+    Class Page Image
+</p>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+![addclass](https://github.com/user-attachments/assets/6e119917-3fef-452c-bb26-81651468c145)
+<p align="center">
+    Add Class Image
+</p>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. In the Level page , to create level just hit Add Data , in the editor must fill the name level + chapter level + Dialogue , optionally bellow the Dialogue is a select picture to add image at the conversation in the game
 
-## Laravel Sponsors
+![level](https://github.com/user-attachments/assets/5b2f5e05-89b1-4e0f-a145-53b148da13fe)
+<p align="center">
+    Levels Page Image
+</p>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![addlevel](https://github.com/user-attachments/assets/1ec5393e-6d47-4f95-99b9-91fd597183f4)
+<p align="center">
+    Example of Add Levels Page Image
+</p>
